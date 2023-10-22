@@ -1,6 +1,11 @@
 Release Notes
 =============
 
+v1.0.5 (10/22/2023)
+-------------------
+- Includes bug fix for failing ``wiki`` scans
+- Stability improvements by using ``requests`` module
+
 v1.0.4c (10/22/2023)
 --------------------
 - Suppress warnings from pip when run as root in Dockerfile
