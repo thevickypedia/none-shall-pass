@@ -48,6 +48,18 @@ Use the options below to configure debug and fail state when broken links are fo
 | `fail`  | optional    | If `true` (Default) the build is failed if broken links are found.<br/>If `false` the build completes successfully and warnings are provided in the logs |
 | `debug` | optional    | If `true` (Default is `false`) debug level logging is enabled                                                                                            |
 
+
+## [Release Notes][release-notes]
+**Requirement**
+```shell
+python -m pip install gitverse
+```
+
+**Usage**
+```shell
+gitverse-release reverse -f release_notes.rst -t 'Release Notes'
+```
+
 ## License & copyright
 
 &copy; Vignesh Rao
@@ -57,3 +69,4 @@ Licensed under the [MIT License][license]
 [marketplace]: https://github.com/marketplace/actions/none-shall-pass
 [screenshot]: https://raw.githubusercontent.com/thevickypedia/none-shall-pass/main/images/marketplace.png
 [license]: https://github.com/thevickypedia/none-shall-pass/blob/main/LICENSE
+[release-notes]: https://github.com/thevickypedia/none-shall-pass/blob/main/release_notes.rst
