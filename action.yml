@@ -7,14 +7,14 @@ inputs:
   repo:
     description: "Name of the repository"
     required: true
-  debug:
-    description: "Debug flag"
-    required: false
-    default: "false"
   fail:
     description: "Flag to fail"
     required: false
     default: "true"
+  debug:
+    description: "Debug flag"
+    required: false
+    default: "false"
 outputs: {}
 runs:
   using: 'docker'
@@ -22,8 +22,8 @@ runs:
   args:
     - ${{ inputs.owner }}
     - ${{ inputs.repo }}
-    - ${{ inputs.debug }}
     - ${{ inputs.fail }}
+    - ${{ inputs.debug }}
 branding:
   icon: check-square
   color: gray-dark

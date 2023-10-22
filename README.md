@@ -1,2 +1,53 @@
-# none-shall-pass
-GitHub Action for hyperlink validators in all markdown files
+# None Shall Pass
+
+`none-shall-pass` is a GitHub action designed to identify and flag any broken links
+within markdown files in your repository.
+
+## Install Guide
+
+### Add `none-shall-pass` action to your build workflow
+
+- In your GitHub repository, select the Actions tab and either add or edit a workflow.
+- Search for `none-shall-pass` from the [Marketplace][marketplace] tab on the right.
+- Copy and paste the yaml into your workflow.
+
+![marketplace][screenshot]
+
+Copy & paste the following workflow definition into your project `.github/workflows/none-shall-pass.yml`
+
+```yaml
+# This workflow checks out code and scans the hyperlinks in 
+# markdown files for broken links
+
+name: Validate hyperlinks on markdown files
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  none-shall-pass:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: thevickypedia/none-shall-pass@v1.0.1
+        with:
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+```
+
+- Commit your changes to trigger the workflow or run the workflow manually.
+
+### Action configuration options
+
+Use the options below to configure debug and fail state when broken links are found in the repository/wiki pages.
+
+| option  | requirement | description                                                                                                                                              |
+|---------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `owner` | required    | Owner/Organization of the repository                                                                                                                     |
+| `repo`  | required    | Name of the repository                                                                                                                                   |
+| `fail`  | optional    | If `true` (Default) the build is failed if broken links are found.<br/>If `false` the build completes successfully and warnings are provided in the logs |
+| `debug` | optional    | If `true` (Default is `false`) debug level logging is enabled                                                                                            |
+
+[marketplace]: https://github.com/marketplace/actions/none-shall-pass
+[screenshot]: https://raw.githubusercontent.com/thevickypedia/none-shall-pass/main/images/marketplace.png
