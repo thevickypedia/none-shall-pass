@@ -1,16 +1,10 @@
-# noinspection PyUnresolvedReferences
-"""Module to validate all the hyperlinks present in markdown files including the ones in Wiki pages.
-
->>> LinkSync
-
-"""
-
 import logging
 import os
 import pathlib
 import re
 import socket
 import subprocess
+import sys
 from collections.abc import Generator
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from multiprocessing import Process, current_process
@@ -32,8 +26,8 @@ FOOTNOTE_LINK_URL_RE = re.compile(r'\[(\d+)\]:\s+(\S+)')  # noqa: RegExpRedundan
 ANCHORED_LINK_RE = re.compile(r'\[([^\]]+)\]:\s+(\S+)')  # noqa: RegExpRedundantEscape
 
 GIT_ENV = os.environ.get("GITHUB_ENV", "sample.env")
-OWNER = os.environ.get('OWNER')
-REPO = os.environ.get('REPO')
+OWNER = sys.argv[1]
+REPO = sys.argv[2]
 
 
 def find_md_links(markdown: str) -> Generator[Tuple[str, str]]:

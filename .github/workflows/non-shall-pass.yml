@@ -15,17 +15,14 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-      - name: Variants
-        run: |
-          echo "FAILED=0" >> $GITHUB_ENV
-          echo "REPO=${{ github.event.repository.name }}" >> $GITHUB_ENV
-          echo "OWNER=${{ github.repository_owner }}" >> $GITHUB_ENV
-      - name: Dependents
+      - name: Variant
+        run: echo "FAILED=0" >> $GITHUB_ENV
+      - name: Dependent
         run: |
           python -m pip install --upgrade pip
           curl -O https://raw.githubusercontent.com/thevickypedia/none-shall-pass/main/src/validator.py
       - name: Validator
-        run: python validator.py
+        run: python validator.py ${{ github.repository_owner }} ${{ github.event.repository.name }}
       - name: Checker
         if: ${{ env.FAILED != '0' }}
         run: exit 1
