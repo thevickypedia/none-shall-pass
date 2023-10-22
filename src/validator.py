@@ -24,11 +24,10 @@ FOOTNOTE_LINK_TEXT_RE = re.compile(r'\[([^\]]+)\]\[(\d+)\]')  # noqa: RegExpRedu
 FOOTNOTE_LINK_URL_RE = re.compile(r'\[(\d+)\]:\s+(\S+)')  # noqa: RegExpRedundantEscape
 ANCHORED_LINK_RE = re.compile(r'\[([^\]]+)\]:\s+(\S+)')  # noqa: RegExpRedundantEscape
 
-GIT_ENV = os.environ.get("GITHUB_ENV", "sample.env")
 OWNER = sys.argv[1]
 REPO = sys.argv[2]
-DEBUG = sys.argv[3]
-FAIL = sys.argv[4]
+FAIL = sys.argv[3]
+DEBUG = sys.argv[4]
 if DEBUG == "true":
     LOGGER.setLevel(level=logging.DEBUG)
 else:

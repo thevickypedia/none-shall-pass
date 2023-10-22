@@ -3,7 +3,7 @@
 # None Shall Pass
 
 `none-shall-pass` is a GitHub action designed to identify and flag any broken links
-within markdown files in your repository.
+within markdown files in your repository and wiki pages.
 
 ## Install Guide
 
@@ -21,7 +21,7 @@ Copy & paste the following workflow definition into your project `.github/workfl
 # This workflow checks out code and scans the hyperlinks in 
 # markdown files for broken links
 
-name: Validate hyperlinks on markdown files
+name: Validate hyperlinks in markdown files
 
 on:
   push:
@@ -32,10 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: thevickypedia/none-shall-pass@v1.0.1
-        with:
-          owner: ${{ github.repository_owner }}
-          repo: ${{ github.event.repository.name }}
+      - uses: thevickypedia/none-shall-pass@v1.0.3
 ```
 
 - Commit your changes to trigger the workflow or run the workflow manually.
@@ -46,8 +43,8 @@ Use the options below to configure debug and fail state when broken links are fo
 
 | option  | requirement | description                                                                                                                                              |
 |---------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `owner` | required    | Owner/Organization of the repository                                                                                                                     |
-| `repo`  | required    | Name of the repository                                                                                                                                   |
+| `owner` | optional    | Owner/Organization of the repository - Defaults to current owner/org name                                                                                |
+| `repo`  | optional    | Name of the repository - Defaults to current repository's name                                                                                           |
 | `fail`  | optional    | If `true` (Default) the build is failed if broken links are found.<br/>If `false` the build completes successfully and warnings are provided in the logs |
 | `debug` | optional    | If `true` (Default is `false`) debug level logging is enabled                                                                                            |
 
