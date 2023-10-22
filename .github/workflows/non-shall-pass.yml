@@ -21,10 +21,7 @@ jobs:
           python -m pip install --upgrade pip
           echo "FAILED=0" >> $GITHUB_ENV
       - name: Downloader
-        run: |
-          curl -H 'Authorization: token ${{ env.GIT_TOKEN }}' -H 'Accept: 
-          application/vnd.github.v3.raw' -O -L 
-          https://api.github.com/repos/thevickypedia/none-shall-pass/contents/validator.py
+        run: curl -O https://raw.githubusercontent.com/thevickypedia/none-shall-pass/main/validator.py
       - name: Validator
         run: |
           pwd
