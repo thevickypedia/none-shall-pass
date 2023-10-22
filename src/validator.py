@@ -9,8 +9,8 @@ from collections.abc import Generator
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from multiprocessing import Process, current_process
 from typing import Tuple
-from urllib import request
-from urllib.error import URLError
+
+import requests
 
 LOGGER = logging.getLogger(__name__)
 DEFAULT_LOG_FORM = '%(levelname)-8s [%(lineno)s] - %(message)s'
@@ -51,7 +51,7 @@ def find_md_links(markdown: str) -> Generator[Tuple[str, str]]:
         yield footnote_links[key], footnote_urls[footnote_links[key]]
 
 
-def verify_url(hyperlink: Tuple[str, str], timeout: int = 3) -> None:
+def verify_url(hyperlink: Tuple[str, str], timeout: Tuple[int, int] = (3, 3)) -> None:
     """Make a GET request to the hyperlink for validation using urllib.
 
     Args:
@@ -67,15 +67,14 @@ def verify_url(hyperlink: Tuple[str, str], timeout: int = 3) -> None:
     """
     text, url = hyperlink
     try:
-        response = request.urlopen(url, timeout=timeout)
-        if response.getcode() == 200:
+        response = requests.get(url, timeout=timeout)
+        if response.ok:
             return
-    except URLError as error:
-        if isinstance(error.reason, socket.timeout):
-            LOGGER.warning("Timeout error: %s", error.reason)
-            # Retry with a longer timeout if URL times out with 3-second timeout
-            return verify_url(hyperlink, 10)
-    except Exception as error:
+    except requests.Timeout as error:
+        LOGGER.warning("Timeout error: %s", error.response)
+        # Retry with a longer timeout if URL times out with 3-second timeout
+        return verify_url(hyperlink, (10, 10))
+    except requests.RequestException as error:
         LOGGER.debug(error)
     if any(map(lambda keyword: keyword in url, ("amazon", "localhost", socket.gethostbyname('localhost')))):
         LOGGER.warning(f"[{current_process().name}] - {text!r} - {url!r} is broken")
