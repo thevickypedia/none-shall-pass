@@ -1,0 +1,31 @@
+# This workflow will run validations against all hyperlinks in markdown files (include Wiki pages)
+
+name: markdown-hyperlink-auditor
+
+# Controls when the workflow will run
+on:
+  workflow_dispatch: { }
+  push:
+
+jobs:
+  validate-markdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Dependent
+        run: |
+          python -m pip install --upgrade pip
+          echo "FAILED=0" >> $GITHUB_ENV
+      - name: Validator
+        run: |
+          echo "Exit Code: ${{ env.FAILED }}"
+          python pre_commit.py
+      - name: Checker
+        if: ${{ env.FAILED != '0' }}
+        run: |
+          echo "Non zero exit code: ${{ env.FAILED }}"
+          exit 1
