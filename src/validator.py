@@ -13,7 +13,7 @@ from typing import Tuple
 import requests
 
 LOGGER = logging.getLogger(__name__)
-DEFAULT_LOG_FORM = '%(levelname)-8s [%(lineno)s] - %(message)s'
+DEFAULT_LOG_FORM = '%(levelname)-8s [%(funcName)s:%(lineno)d] - %(message)s'
 DEFAULT_FORMATTER = logging.Formatter(datefmt='%b-%d-%Y %I:%M:%S %p', fmt=DEFAULT_LOG_FORM)
 HANDLER = logging.StreamHandler()
 HANDLER.setFormatter(fmt=DEFAULT_FORMATTER)

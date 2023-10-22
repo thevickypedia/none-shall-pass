@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+v1.0.6 (10/22/2023)
+-------------------
+- Improve logging
+
 v1.0.5 (10/22/2023)
 -------------------
 - Includes bug fix for failing ``wiki`` scans
