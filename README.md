@@ -1,3 +1,5 @@
+[![made-with-gha](https://img.shields.io/badge/Made%20with-Github_Actions-black?style=for-the-badge&logo=GitHub)][marketplace]
+
 # None Shall Pass
 
 `none-shall-pass` is a GitHub action designed to identify and flag any broken links
@@ -49,5 +51,12 @@ Use the options below to configure debug and fail state when broken links are fo
 | `fail`  | optional    | If `true` (Default) the build is failed if broken links are found.<br/>If `false` the build completes successfully and warnings are provided in the logs |
 | `debug` | optional    | If `true` (Default is `false`) debug level logging is enabled                                                                                            |
 
+## License & copyright
+
+&copy; Vignesh Rao
+
+Licensed under the [MIT License][license]
+
 [marketplace]: https://github.com/marketplace/actions/none-shall-pass
 [screenshot]: https://raw.githubusercontent.com/thevickypedia/none-shall-pass/main/images/marketplace.png
+[license]: https://github.com/thevickypedia/none-shall-pass/blob/main/LICENSE
