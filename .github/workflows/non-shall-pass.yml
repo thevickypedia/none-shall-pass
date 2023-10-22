@@ -28,8 +28,11 @@ jobs:
           ls -ltrh
           echo "Exit Code: ${{ env.FAILED }}"
           echo "github.event.repository.name: ${{ github.event.repository.name }}"
-          echo "github.event.repository.owner: ${{ github.event.repository.owner }}"
+          echo "github.repository_owner: ${{ github.repository_owner }}"
           echo "github.repository: ${{ github.repository }}"
+
+          echo "github.event.repository.full_name ${{ github.event.repository.full_name }}"
+          echo "github.event.repository.owner.name ${{ github.event.repository.owner.name }}"
       - name: Checker
         if: ${{ env.FAILED != '0' }}
         run: |
