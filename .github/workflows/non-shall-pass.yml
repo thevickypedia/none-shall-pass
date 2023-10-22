@@ -21,16 +21,15 @@ jobs:
           python -m pip install --upgrade pip
           echo "FAILED=0" >> $GITHUB_ENV
       - name: Downloader
-        run: curl -O https://raw.githubusercontent.com/thevickypedia/none-shall-pass/main/validator.py
+        run: curl -O https://raw.githubusercontent.com/thevickypedia/none-shall-pass/main/src/validator.py
       - name: Validator
         run: |
           pwd
           ls -ltrh
           echo "Exit Code: ${{ env.FAILED }}"
           echo "github.event.repository.name: ${{ github.event.repository.name }}"
-          echo "github.event.repository: ${{ github.event.repository }}"
+          echo "github.event.repository.owner: ${{ github.event.repository.owner }}"
           echo "github.repository: ${{ github.repository }}"
-          echo "github.event: ${{ github.event }}"
       - name: Checker
         if: ${{ env.FAILED != '0' }}
         run: |
