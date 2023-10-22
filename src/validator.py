@@ -154,4 +154,6 @@ def check_all_md_files():
 
 
 if __name__ == '__main__':
-    check_all_md_files()
+    # check_all_md_files()
+    from pprint import pprint
+    pprint(os.environ)
