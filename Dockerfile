@@ -8,8 +8,8 @@ RUN apk add --no-cache git
 COPY src/validator.py /validator.py
 
 # Upgrade pip and install requests module
-RUN python -m pip install --upgrade --user pip
-RUN python -m pip install requests
+RUN python -m pip install --no-warn-script-location --upgrade pip
+RUN python -m pip install --no-warn-script-location requests
 
 # Set validator.py as executable
 RUN chmod +x /validator.py
