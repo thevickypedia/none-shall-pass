@@ -8,17 +8,16 @@ import sys
 from collections.abc import Generator
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from multiprocessing import Process, current_process
-from typing import Tuple, List, Union
+from typing import Tuple
 from urllib import request
 from urllib.error import URLError
 
 LOGGER = logging.getLogger(__name__)
-DEFAULT_LOG_FORM = '%(levelname)-8s %(message)s'
+DEFAULT_LOG_FORM = '%(levelname)-8s [%(lineno)s] - %(message)s'
 DEFAULT_FORMATTER = logging.Formatter(datefmt='%b-%d-%Y %I:%M:%S %p', fmt=DEFAULT_LOG_FORM)
 HANDLER = logging.StreamHandler()
 HANDLER.setFormatter(fmt=DEFAULT_FORMATTER)
 LOGGER.addHandler(hdlr=HANDLER)
-LOGGER.setLevel(level=logging.INFO)
 
 INLINE_LINK_RE = re.compile(r'\[([^\]]+)\]\(([^)]+)\)')  # noqa: RegExpRedundantEscape
 FOOTNOTE_LINK_TEXT_RE = re.compile(r'\[([^\]]+)\]\[(\d+)\]')  # noqa: RegExpRedundantEscape
@@ -28,6 +27,12 @@ ANCHORED_LINK_RE = re.compile(r'\[([^\]]+)\]:\s+(\S+)')  # noqa: RegExpRedundant
 GIT_ENV = os.environ.get("GITHUB_ENV", "sample.env")
 OWNER = sys.argv[1]
 REPO = sys.argv[2]
+DEBUG = sys.argv[3]
+FAIL = sys.argv[4]
+if DEBUG == "true":
+    LOGGER.setLevel(level=logging.DEBUG)
+else:
+    LOGGER.setLevel(level=logging.INFO)
 
 
 def find_md_links(markdown: str) -> Generator[Tuple[str, str]]:
@@ -102,33 +107,7 @@ def verify_hyperlinks_in_md(filename: str) -> None:
     for future in as_completed(futures):
         if future.exception():
             LOGGER.error(future.exception())
-            if os.getenv("FAILED") == "1":
-                LOGGER.info("Failed flag has been set already.")
-            else:
-                LOGGER.info("Setting FAILED flag to 1")
-                set_exit_code()
-
-
-def set_exit_code() -> None:
-    """Sets the 'FAILED' env var to a non zero value."""
-    env_vars = {k: v for k, v in os.environ.items()}
-    env_vars['FAILED'] = 1
-    with open(GIT_ENV, 'w') as env_file:
-        for k, v in env_vars.items():
-            env_file.write(f"{k}={v}\n")
-
-
-def initiate_validation(arg: Union[str, List[str]]) -> None:
-    """Verifies if filename is a string or a list and processes md validations accordingly."""
-    if isinstance(arg, str):
-        verify_hyperlinks_in_md(arg)
-    elif isinstance(arg, list):
-        for file in arg:
-            verify_hyperlinks_in_md(file)
-    else:
-        # Should never get here
-        set_exit_code()
-        raise Exception("Something went wrong")
+            sys.exit(1)
 
 
 def run_git_cmd(cmd: str):
@@ -139,45 +118,50 @@ def run_git_cmd(cmd: str):
     except (subprocess.CalledProcessError, subprocess.SubprocessError, Exception) as error:
         if isinstance(error, subprocess.CalledProcessError):
             result = error.output.decode(encoding='UTF-8').strip()
-            LOGGER.error(f"[{error.returncode}]: {result or error.__str__()}")
+            LOGGER.warning(f"[{error.returncode}]: {result or error.__str__()}")
         else:
-            LOGGER.error(error)
+            LOGGER.warning(error)
 
 
 def check_all_md_files() -> None:
     """Downloads all the markdown files from wiki and initiates individual validation process for each markdown file."""
+    _set_exit_code = False
     # Scans markdown files locally
     md_files = [os.path.join(__path, file_) for __path, __directory, __file in os.walk(os.getcwd())
                 for file_ in __file if file_.lower().endswith(".md")]
     LOGGER.debug(md_files)
-    processes = [Process(target=initiate_validation, args=(md_files,))]
-    processes[0].start()
 
-    if not all((REPO, OWNER)):
-        LOGGER.error("OWNER and REPO information not found")
-        set_exit_code()
-        processes[0].join()
-        return
+    # Checks markdown files in repo
+    processes = []
+    for file in md_files:
+        proc = Process(target=verify_hyperlinks_in_md, args=(file,))
+        proc.start()
+        proc.name = file
+        processes.append(proc)
 
     # Clones wiki pages
     wiki_path = f"{REPO}.wiki"
-    if run_git_cmd(f"git clone https://github.com/{OWNER}/{wiki_path}.git"):
+    if all((REPO, OWNER)) and run_git_cmd(f"git clone https://github.com/{OWNER}/{wiki_path}.git"):
         wiki_path = os.path.join(os.getcwd(), wiki_path)
-    else:
-        # Do not set exit code since no wiki doesn't warrant a failure
-        return
+        if os.path.isdir(wiki_path):
+            for file in os.listdir(wiki_path):
+                if file.endswith(".md"):
+                    process = Process(target=verify_hyperlinks_in_md, args=(os.path.join(wiki_path, file),))
+                    process.start()
+                    process.name = file
+                    processes.append(process)
+        else:
+            LOGGER.info("Clone ran successfully but wiki path wasn't found")
+            _set_exit_code = True
 
-    if os.path.isdir(wiki_path):
-        for file in os.listdir(wiki_path):
-            if file.endswith(".md"):
-                process = Process(target=initiate_validation, args=(os.path.join(wiki_path, file),))
-                process.start()
-                processes.append(process)
-    else:
-        LOGGER.info("Clone ran successfully but wiki path wasn't found")
-        set_exit_code()
     for process in processes:
         process.join()
+        if process.exitcode != 0:
+            LOGGER.error("Process '%s' exited with a non-zero exit code.", process.name)
+            _set_exit_code = True
+
+    if FAIL == "true" and _set_exit_code:
+        sys.exit(1)
 
 
 if __name__ == '__main__':

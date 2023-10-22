@@ -1,0 +1,26 @@
+name: 'none-shall-pass'
+description: 'Run validations against hyperlinks in all markdown files (including Wiki pages)'
+inputs:
+  owner:
+    description: "Owner/Organization of the repository"
+    required: true
+  repo:
+    description: "Name of the repository"
+    required: true
+  debug:
+    description: "Debug flag"
+    required: false
+    default: "false"
+  fail:
+    description: "Flag to fail"
+    required: false
+    default: "true"
+outputs: {}
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.owner }}
+    - ${{ inputs.repo }}
+    - ${{ inputs.debug }}
+    - ${{ inputs.fail }}
