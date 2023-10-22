@@ -24,3 +24,6 @@ runs:
     - ${{ inputs.repo }}
     - ${{ inputs.debug }}
     - ${{ inputs.fail }}
+branding:
+  icon: check-square
+  color: gray-dark
