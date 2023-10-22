@@ -16,17 +16,16 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-      - name: Dependent
+      - name: Dependents
         run: |
           python -m pip install --upgrade pip
           echo "FAILED=0" >> $GITHUB_ENV
-      - name: Downloader
-        run: curl -O https://raw.githubusercontent.com/thevickypedia/none-shall-pass/main/src/validator.py
+          curl -O https://raw.githubusercontent.com/thevickypedia/none-shall-pass/main/src/validator.py
+          echo "REPO=${{ github.event.repository.name }}" >> $GITHUB_ENV
+          echo "OWNER=${{ github.repository_owner }}" >> $GITHUB_ENV
       - name: Validator
         run: |
           echo "Exit Code: ${{ env.FAILED }}"
-          echo "github.event.repository.name: ${{ github.event.repository.name }}"
-          echo "github.repository_owner: ${{ github.repository_owner }}"
           python validator.py
       - name: Checker
         if: ${{ env.FAILED != '0' }}
