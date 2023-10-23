@@ -23,6 +23,7 @@ author = 'Vignesh Rao'
 extensions = [
     'sphinx.ext.napoleon',  # certain styles of doc strings
     'sphinx.ext.autodoc',  # generates from doc strings
+    'sphinx_rtd_dark_mode'
 ]
 
 # https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html#configuration
@@ -35,14 +36,6 @@ templates_path = ['_templates']
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
-
-# -- Options for HTML output -------------------------------------------------
-# https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
-
-html_theme = 'pyramid'
-html_theme_options = {
-    "body_max_width": "80%"
-}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

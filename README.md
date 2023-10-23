@@ -63,7 +63,7 @@ gitverse-release reverse -f release_notes.rst -t 'Release Notes'
 ## [Docs][docs]
 **Requirement**
 ```shell
-pip install sphinx==5.1.1
+pip install sphinx==5.1.1 sphinx-rtd-dark-mode
 ```
 
 **Usage**
