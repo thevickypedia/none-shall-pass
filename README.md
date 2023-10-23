@@ -1,5 +1,7 @@
 [![made-with-gha](https://img.shields.io/badge/Made%20with-Github_Actions-black?style=for-the-badge&logo=GitHub)][marketplace]
 
+[![pages](https://github.com/thevickypedia/none-shall-pass/actions/workflows/pages/pages-build-deployment/badge.svg)][pages]
+
 # None Shall Pass
 
 `none-shall-pass` is a GitHub action designed to identify and flag any broken links
@@ -82,3 +84,4 @@ Licensed under the [MIT License][license]
 [license]: https://github.com/thevickypedia/none-shall-pass/blob/main/LICENSE
 [release-notes]: https://github.com/thevickypedia/none-shall-pass/blob/main/release_notes.rst
 [docs]: https://thevickypedia.github.io/none-shall-pass/
+[pages]: https://github.com/thevickypedia/none-shall-pass/actions/workflows/pages/pages-build-deployment
