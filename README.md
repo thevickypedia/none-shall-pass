@@ -60,6 +60,17 @@ python -m pip install gitverse
 gitverse-release reverse -f release_notes.rst -t 'Release Notes'
 ```
 
+## [Docs][docs]
+**Requirement**
+```shell
+pip install sphinx==5.1.1
+```
+
+**Usage**
+```shell
+bash pre_commit.sh
+```
+
 ## License & copyright
 
 &copy; Vignesh Rao
@@ -70,3 +81,4 @@ Licensed under the [MIT License][license]
 [screenshot]: https://raw.githubusercontent.com/thevickypedia/none-shall-pass/main/images/marketplace.png
 [license]: https://github.com/thevickypedia/none-shall-pass/blob/main/LICENSE
 [release-notes]: https://github.com/thevickypedia/none-shall-pass/blob/main/release_notes.rst
+[docs]: https://thevickypedia.github.io/none-shall-pass/

@@ -41,6 +41,7 @@ def find_md_links(markdown: str) -> Generator[Tuple[str, str]]:
         markdown: Data from markdown file.
 
     Yields:
+        Tuple[str, str]:
         Tuple of the string and the associated URL.
     """
     yield from list(INLINE_LINK_RE.findall(markdown))
@@ -108,8 +109,16 @@ def verify_hyperlinks_in_md(filename: str) -> None:
             sys.exit(1)
 
 
-def run_git_cmd(cmd: str):
-    """Run the git command."""
+def run_git_cmd(cmd: str) -> bool:
+    """Runs a git command using subprocess module.
+
+    Args:
+        cmd: Takes the command as an argument.
+
+    Returns:
+        bool:
+        A boolean flag to indicate the status.
+    """
     try:
         subprocess.check_output(cmd, shell=True, stderr=subprocess.DEVNULL)
         return True

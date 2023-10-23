@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>GitHub Action &#8212; none-shall-pass  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pyramid.css" />
+    <link rel="stylesheet" type="text/css" href="_static/static.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="none-shall-pass - GitHub Action" href="index.html" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head><body>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="none-shall-pass - GitHub Action"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">none-shall-pass  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">GitHub Action</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="github-action">
+<h1>GitHub Action<a class="headerlink" href="#github-action" title="Permalink to this heading">¶</a></h1>
+<section id="configuration-metadata">
+<h2>Configuration MetaData<a class="headerlink" href="#configuration-metadata" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">none-shall-pass</span></code> includes a GitHub action config metadata, that includes various input parameters that allow users to customize the behavior of the action according to their needs.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">owner</span></code> and <code class="docutils literal notranslate"><span class="pre">repo</span></code> inputs are optional and can be used to specify the owner/organization and repository name.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">fail</span></code> input is optional and controls whether the action will fail if broken links are found.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">debug</span></code> input is also optional and can be used to enable debugging, providing more detailed information about the validation process.</p></li>
+<li><p>Default values are provided for all the inputs, allowing the action to work seamlessly in common use cases.</p></li>
+</ul>
+</section>
+<section id="docker-setup">
+<h2>Docker Setup<a class="headerlink" href="#docker-setup" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Containerization enhances the action’s portability and isolates it from external dependencies.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> sets up the container environment for the GitHub Action.</p></li>
+<li><p>It uses the python 3.11-alpine base image.</p></li>
+</ul>
+</section>
+<section id="validator">
+<h2>Validator<a class="headerlink" href="#validator" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">validator.py</span></code>, is responsible for hyperlink validation in Markdown files.</p></li>
+<li><p>It accepts inputs provided as command-line arguments.</p></li>
+<li><p>The script extracts hyperlinks from Markdown content, validates them concurrently using multithreading, and logs the validation results.</p></li>
+<li><p>It can differentiate between local Markdown files and Wiki pages within the repository, expanding its validation scope.</p></li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">GitHub Action</a><ul>
+<li><a class="reference internal" href="#configuration-metadata">Configuration MetaData</a></li>
+<li><a class="reference internal" href="#docker-setup">Docker Setup</a></li>
+<li><a class="reference internal" href="#validator">Validator</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="index.html"
+                          title="previous chapter">none-shall-pass - GitHub Action</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/action.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="none-shall-pass - GitHub Action"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">none-shall-pass  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">GitHub Action</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, Vignesh Rao.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+    </div>
+  </body>
+</html>

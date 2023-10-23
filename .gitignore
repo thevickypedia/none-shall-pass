@@ -1,3 +1,5 @@
 .idea
 venv
 sample.env
+doc_gen/_build
+doc_gen/_static
