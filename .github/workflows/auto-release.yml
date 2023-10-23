@@ -31,30 +31,24 @@ jobs:
           ")
           if [ "$latest_tag" != "1" ]; then
             echo "Tag '$latest_tag' already exists for version '$current_version'. Exiting."
+            echo "skip=true" >> $GITHUB_ENV
             exit 0
           else
+            echo "skip=false" >> $GITHUB_ENV
             echo "No production ready tags were found for version '$current_version'"
           fi
           new_version="v$current_version-prerelease-$(date +%s)"
           echo "tag_name=$new_version" >> $GITHUB_ENV
-          echo "Creating a new release for $new_version"
-        shell: bash
-
-      - name: Set commit message
-        run: |
-          commit_message=$(git log -1 --pretty=%B)
-          # Remove leading and trailing white spaces (including line breaks and backticks) from the commit message
-          stripped_commit_message=$(echo "$commit_message" | tr -d '`' | awk '{$1=$1};1')
-          echo "$commit_message" > commit_message.txt
+          new_msg="Creating a pre-release [$new_version] for $current_version"
+          echo "commit_msg=$new_msg" >> $GITHUB_ENV
+          echo $new_msg
         shell: bash
 
       - name: Create New Tag
+        if: env.skip == 'false'
         run: |
-          commit_msg=$(cat commit_message.txt)
-          # Replace line breaks with \n to preserve multiline content within JSON
-          commit_msg_escaped=$(echo "$commit_msg" | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/\\n/g')
           # Create a new tag with tag_name
-          json_data="{\"tag\":\"${{ env.tag_name }}\",\"message\":\"$commit_msg_escaped\",\"object\":\"$(git rev-parse HEAD)\",\"type\":\"commit\"}"
+          json_data="{\"tag\":\"${{ env.tag_name }}\",\"message\":\"${{ env.commit_msg }}\",\"object\":\"$(git rev-parse HEAD)\",\"type\":\"commit\"}"
           # Create a new tag with the tag_name
           response=$(curl -X POST -H "Authorization: token ${{ secrets.GIT_TOKEN }}" \
             -d "$json_data" \
@@ -69,11 +63,9 @@ jobs:
         shell: bash
 
       - name: Create New Release
+        if: env.skip == 'false'
         run: |
-          commit_msg=$(cat commit_message.txt)
-          # Replace line breaks with \n to preserve multiline content within JSON
-          commit_msg_escaped=$(echo "$commit_msg" | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/\\n/g')
-          release_data="{\"tag_name\":\"${{ env.tag_name }}\",\"name\":\"${{ env.tag_name }}\",\"body\":\"$commit_msg_escaped\",\"draft\":false,\"prerelease\":true}"
+          release_data="{\"tag_name\":\"${{ env.tag_name }}\",\"name\":\"${{ env.tag_name }}\",\"body\":\"${{ env.commit_msg }}\",\"draft\":false,\"prerelease\":true}"
           response=$(curl -X POST -H "Authorization: token ${{ secrets.GIT_TOKEN }}" \
             -d "$release_data" \
             "https://api.github.com/repos/${{ github.repository_owner }}/${{ github.event.repository.name }}/releases")
