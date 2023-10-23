@@ -1,0 +1,40 @@
+name: auto-release
+
+on:
+  push:
+
+jobs:
+  auto_tag:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get Current Time
+        id: timestamp
+        run: echo "::set-output name=timestamp::$(date +%s)"
+
+      - name: Determine Current Version
+        id: version
+        run: |
+          current_version=$(python -c "import src; print(src.version)")
+          echo "::set-output name=current_version::$current_version"
+        shell: bash
+
+      - name: Append Timestamp to Version
+        id: new_version
+        run: |
+          current_version="${{ steps.version.outputs.current_version }}"
+          timestamp="${{ steps.timestamp.outputs.timestamp }}"
+          new_version="${current_version}${timestamp}"
+          echo "::set-output name=new_version::$new_version"
+        shell: bash
+
+      - name: Create New Tag
+        run: |
+          git tag -a ${{ steps.new_version.outputs.new_version }} -m "Release ${{ steps.new_version.outputs.new_version }}"
+          git push origin --tags
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+        shell: bash
