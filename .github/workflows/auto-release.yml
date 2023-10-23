@@ -17,6 +17,22 @@ jobs:
       - name: Set version number
         run: |
           current_version=$(python -c "import src; print(src.version)")
+          tag_list=$(git tag -l)
+          latest_tag=$(python -c "
+          tag_list = '''$tag_list'''.lower().split('\n')
+          for version in tag_list:
+              if 'prerelease' not in version and '$current_version'.lower() in version:
+                  print(version)
+                  break
+          else:
+              print(1)
+          ")
+          if [ "$latest_tag" != "1" ]; then
+            echo "Tag '$latest_tag' already exists for version '$current_version'. Exiting."
+            exit 0
+          else
+            echo "No production ready tags were found for version '$current_version'"
+          fi
           new_version="v$current_version-prerelease-$(date +%s)"
           echo "tag_name=$new_version" >> $GITHUB_ENV
           echo "Creating a new release for $new_version"
