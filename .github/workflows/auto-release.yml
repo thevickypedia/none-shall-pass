@@ -2,39 +2,58 @@ name: auto-release
 
 on:
   push:
+    branches:
+      - main
 
 jobs:
-  auto_tag:
+  auto_release:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Get Current Time
-        id: timestamp
-        run: echo "::set-output name=timestamp::$(date +%s)"
-
-      - name: Determine Current Version
-        id: version
+      - name: Set version number
         run: |
           current_version=$(python -c "import src; print(src.version)")
-          echo "::set-output name=current_version::$current_version"
+          new_version="v$current_version-prerelease-$(date +%s)"
+          echo "tag_name=$new_version" >> $GITHUB_ENV
         shell: bash
 
-      - name: Append Timestamp to Version
-        id: new_version
+      - name: Set commit message
         run: |
-          current_version="${{ steps.version.outputs.current_version }}"
-          timestamp="${{ steps.timestamp.outputs.timestamp }}"
-          new_version="${current_version}${timestamp}"
-          echo "::set-output name=new_version::$new_version"
+          commit_message=$(git log -1 --pretty=%B)
+          echo "commit_message: ${commit_message}"
+          # Remove leading and trailing white spaces (including line breaks) from the commit message
+          stripped_commit_message=$(echo "$commit_message" | awk '{$1=$1};1')
+          echo "stripped_commit_message: ${stripped_commit_message}"
+          # Escape the stripped commit_message to handle line breaks
+          escaped_commit_message=$(echo "$stripped_commit_message" | jq --arg msg "$stripped_commit_message" -n -r '$msg')
+          echo "escaped_commit_message: ${escaped_commit_message}"
+          echo "commit_msg=$escaped_commit_message" >> $GITHUB_ENV
         shell: bash
 
       - name: Create New Tag
         run: |
-          git tag -a ${{ steps.new_version.outputs.new_version }} -m "Release ${{ steps.new_version.outputs.new_version }}"
-          git push origin --tags
-        env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          # Create a new tag with tag_name
+          json_data="{\"tag\":\"${{ env.tag_name }}\",\"message\":\"${{ env.commit_msg }}\",\"object\":\"$(git rev-parse HEAD)\",\"type\":\"commit\"}"
+          # Create a new tag with the tag_name
+          response=$(curl -X POST -H "Authorization: token ${{ secrets.GIT_TOKEN }}" \
+            -d "$json_data" \
+            "https://api.github.com/repos/${{ github.repository_owner }}/${{ github.event.repository.name }}/git/tags")
+          tag_sha=$(echo "$response" | tr -d '\000-\037' | jq -r '.sha')
+
+          # Create a reference to the new tag
+          json_data="{\"ref\":\"refs/tags/${{ env.tag_name }}\",\"sha\":\"$tag_sha\"}"
+          curl -X POST -H "Authorization: token ${{ secrets.GIT_TOKEN }}" \
+            -d "$json_data" \
+            "https://api.github.com/repos/${{ github.repository_owner }}/${{ github.event.repository.name }}/git/refs"
+        shell: bash
+
+      - name: Create New Release
+        run: |
+          release_data="{\"tag_name\":\"${{ env.tag_name }}\",\"name\":\"${{ env.tag_name }}\",\"body\":\"${{ env.commit_msg }}\",\"draft\":false,\"prerelease\":true}"
+          response=$(curl -X POST -H "Authorization: token ${{ secrets.GIT_TOKEN }}" \
+            -d "$release_data" \
+            "https://api.github.com/repos/${{ github.repository_owner }}/${{ github.event.repository.name }}/releases")
         shell: bash
