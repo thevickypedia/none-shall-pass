@@ -12,7 +12,9 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+            fetch-depth: 0
 
       - name: Set version number
         run: |
@@ -41,13 +43,10 @@ jobs:
       - name: Set commit message
         run: |
           commit_message=$(git log -1 --pretty=%B)
-          echo "commit_message: ${commit_message}"
           # Remove leading and trailing white spaces (including line breaks) from the commit message
           stripped_commit_message=$(echo "$commit_message" | tr -d '`' | awk '{$1=$1};1')
-          echo "stripped_commit_message: ${stripped_commit_message}"
           # Escape the stripped commit_message to handle line breaks
           escaped_commit_message=$(echo "$stripped_commit_message" | jq --arg msg "$stripped_commit_message" -n -r '$msg')
-          echo "escaped_commit_message: ${escaped_commit_message}"
           echo "commit_msg=$escaped_commit_message" >> $GITHUB_ENV
         shell: bash
 
