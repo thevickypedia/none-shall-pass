@@ -3,34 +3,29 @@ Release Notes
 
 v1.0.6 (10/22/2023)
 -------------------
-- Improve logging
+- Update log format to include function names
 
 v1.0.5 (10/22/2023)
 -------------------
-- Includes bug fix for failing ``wiki`` scans
-- Stability improvements by using ``requests`` module
+- Auto generate release notes
+- Update README.md
 
 v1.0.4c (10/22/2023)
 --------------------
-- Suppress warnings from pip when run as root in Dockerfile
+- Suppress warnings from pip
 
 v1.0.4b (10/22/2023)
 --------------------
-- Use requests module to avoid ``forbidden`` errors
-- Upgrade ``pip`` and install ``requests`` module in ``Dockerfile``
+- Use requests module to support links with JS
 
 v1.0.4a (10/22/2023)
 --------------------
-- Install git in docker to run clone wiki pages successfully
+- Install git in Dockerfile
 
 v1.0.3 (10/22/2023)
 -------------------
-- Get owner and repo information via GitHub env
-- Run action without any mandatory args
-- Fix order of fail and debug flags during runtime
+- Get `owner` and `repo` via github env
 
 v1.0.1 (10/22/2023)
 -------------------
-- Scan for hyperlinks in markdown files and wiki pages
-- Fail the action when hyperlink is unreachable
-- Ignore hyperlinks that are amazon pages and localhost
+- Update branding info

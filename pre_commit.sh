@@ -42,6 +42,7 @@ gen_docs() {
   mkdir -p doc_gen/_static  # Create a _static directory if unavailable
   cd doc_gen && make clean html  # cd into doc_gen and create the runbook
   mv _build/html/* ../docs  # Move the runbook
+  cp theme.css ../docs/_static/theme.css  # Copy the theme.css file
   cd ../
 }
 

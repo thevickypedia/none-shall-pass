@@ -11,9 +11,33 @@ none-shall-pass - GitHub Action
 
    action
 
+Connection
+==========
+.. automodule:: src.connection
+   :members:
+   :undoc-members:
+
+Git
+===
+.. automodule:: src.git
+   :members:
+   :undoc-members:
+
+Logger
+======
+.. automodule:: src.logger
+   :members:
+   :undoc-members:
+
+Lookup
+======
+.. automodule:: src.lookup
+   :members:
+   :undoc-members:
+
 Validator
 =========
-.. automodule:: validator
+.. automodule:: src.validator
    :members:
    :undoc-members:
 
