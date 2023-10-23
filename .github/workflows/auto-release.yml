@@ -1,6 +1,7 @@
 name: auto-release
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -18,6 +19,7 @@ jobs:
           current_version=$(python -c "import src; print(src.version)")
           new_version="v$current_version-prerelease-$(date +%s)"
           echo "tag_name=$new_version" >> $GITHUB_ENV
+          echo "Creating a new release for $new_version"
         shell: bash
 
       - name: Set commit message
