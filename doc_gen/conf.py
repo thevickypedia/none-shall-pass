@@ -27,7 +27,6 @@ author = 'Vignesh Rao'
 extensions = [
     'sphinx.ext.napoleon',  # certain styles of doc strings
     'sphinx.ext.autodoc',  # generates from doc strings
-    'sphinx_rtd_dark_mode'
 ]
 
 # https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html#configuration
@@ -45,6 +44,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+html_theme = "sphinx_rtd_theme"
 html_theme_options = {
     "body_max_width": "100%"
 }
