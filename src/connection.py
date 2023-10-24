@@ -11,7 +11,7 @@ from typing import Tuple
 
 import requests
 
-from src.logger import LOGGER
+from logger import LOGGER
 
 
 def verify_url(hyperlink: Tuple[str, str], timeout: Tuple[int, int] = (3, 3)) -> None:

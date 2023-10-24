@@ -5,8 +5,10 @@ import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from multiprocessing import Process, current_process
 
-from src import lookup, connection, git
-from src.logger import LOGGER
+import connection
+import git
+import lookup
+from logger import LOGGER
 
 OWNER = sys.argv[1]
 REPO = sys.argv[2]

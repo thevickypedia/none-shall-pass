@@ -7,7 +7,7 @@
 
 import subprocess
 
-from src.logger import LOGGER
+from logger import LOGGER
 
 
 def run_command(cmd: str) -> bool:
