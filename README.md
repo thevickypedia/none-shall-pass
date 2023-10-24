@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: thevickypedia/none-shall-pass@v1.0.6
+      - uses: thevickypedia/none-shall-pass@v1.0.7
 ```
 
 - Commit your changes to trigger the workflow or run the workflow manually.

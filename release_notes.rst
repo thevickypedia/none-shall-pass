@@ -1,31 +1,45 @@
 Release Notes
 =============
 
+v1.0.7-prerelease-1698176010 (10/24/2023)
+-----------------------------------------
+- Creating a pre-release [v1.0.7-prerelease-1698176010] for 1.0.7
+
+v1.0.7 (10/24/2023)
+-------------------
+- Split validator into multiple modules
+- Setup automatic prerelease
+
 v1.0.6 (10/22/2023)
 -------------------
-- Update log format to include function names
+- Improve logging
 
 v1.0.5 (10/22/2023)
 -------------------
-- Auto generate release notes
-- Update README.md
+- Includes bug fix for failing ``wiki`` scans
+- Stability improvements by using ``requests`` module
 
 v1.0.4c (10/22/2023)
 --------------------
-- Suppress warnings from pip
+- Suppress warnings from pip when run as root in Dockerfile
 
 v1.0.4b (10/22/2023)
 --------------------
-- Use requests module to support links with JS
+- Use requests module to avoid ``forbidden`` errors
+- Upgrade ``pip`` and install ``requests`` module in ``Dockerfile``
 
 v1.0.4a (10/22/2023)
 --------------------
-- Install git in Dockerfile
+- Install git in docker to run clone wiki pages successfully
 
 v1.0.3 (10/22/2023)
 -------------------
-- Get `owner` and `repo` via github env
+- Get owner and repo information via GitHub env
+- Run action without any mandatory args
+- Fix order of fail and debug flags during runtime
 
 v1.0.1 (10/22/2023)
 -------------------
-- Update branding info
+- Scan for hyperlinks in markdown files and wiki pages
+- Fail the action when hyperlink is unreachable
+- Ignore hyperlinks that are amazon pages and localhost

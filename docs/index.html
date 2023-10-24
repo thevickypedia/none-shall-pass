@@ -88,15 +88,15 @@
 </ul>
 </div>
 </section>
-<section id="module-src.connection">
-<span id="connection"></span><h1>Connection<a class="headerlink" href="#module-src.connection" title="Permalink to this heading"></a></h1>
+<section id="module-connection">
+<span id="connection"></span><h1>Connection<a class="headerlink" href="#module-connection" title="Permalink to this heading"></a></h1>
 <p>Handles connections to the URLs in a pool of threads.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Connection</span>
 </pre></div>
 </div>
 <dl class="py function">
-<dt class="sig sig-object py" id="src.connection.verify_url">
-<span class="sig-prename descclassname"><span class="pre">src.connection.</span></span><span class="sig-name descname"><span class="pre">verify_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hyperlink</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(3,</span> <span class="pre">3)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.connection.verify_url" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="connection.verify_url">
+<span class="sig-prename descclassname"><span class="pre">connection.</span></span><span class="sig-name descname"><span class="pre">verify_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hyperlink</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(3,</span> <span class="pre">3)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#connection.verify_url" title="Permalink to this definition"></a></dt>
 <dd><p>Make a GET request to the hyperlink for validation using requests module.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -122,15 +122,15 @@
 </dd></dl>
 
 </section>
-<section id="module-src.git">
-<span id="git"></span><h1>Git<a class="headerlink" href="#module-src.git" title="Permalink to this heading"></a></h1>
+<section id="module-git">
+<span id="git"></span><h1>Git<a class="headerlink" href="#module-git" title="Permalink to this heading"></a></h1>
 <p>Runs git command using subprocess module.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Git</span>
 </pre></div>
 </div>
 <dl class="py function">
-<dt class="sig sig-object py" id="src.git.run_command">
-<span class="sig-prename descclassname"><span class="pre">src.git.</span></span><span class="sig-name descname"><span class="pre">run_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#src.git.run_command" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="git.run_command">
+<span class="sig-prename descclassname"><span class="pre">git.</span></span><span class="sig-name descname"><span class="pre">run_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#git.run_command" title="Permalink to this definition"></a></dt>
 <dd><p>Run git command to clone wiki locally and handle exceptions from subprocess module.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -146,8 +146,8 @@
 </dd></dl>
 
 </section>
-<section id="module-src.logger">
-<span id="logger"></span><h1>Logger<a class="headerlink" href="#module-src.logger" title="Permalink to this heading"></a></h1>
+<section id="module-logger">
+<span id="logger"></span><h1>Logger<a class="headerlink" href="#module-logger" title="Permalink to this heading"></a></h1>
 <p>Configures a Python logger with a stream handler.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Logger</span>
 </pre></div>
@@ -160,8 +160,8 @@
 </ul>
 </div>
 </section>
-<section id="module-src.lookup">
-<span id="lookup"></span><h1>Lookup<a class="headerlink" href="#module-src.lookup" title="Permalink to this heading"></a></h1>
+<section id="module-lookup">
+<span id="lookup"></span><h1>Lookup<a class="headerlink" href="#module-lookup" title="Permalink to this heading"></a></h1>
 <p>Handles lookup for hyperlinks in markdown files using regex search.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Lookup</span>
 </pre></div>
@@ -176,8 +176,8 @@
 </ul>
 </div>
 <dl class="py function">
-<dt class="sig sig-object py" id="src.lookup.find_md_links">
-<span class="sig-prename descclassname"><span class="pre">src.lookup.</span></span><span class="sig-name descname"><span class="pre">find_md_links</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">markdown</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Generator</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.lookup.find_md_links" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="lookup.find_md_links">
+<span class="sig-prename descclassname"><span class="pre">lookup.</span></span><span class="sig-name descname"><span class="pre">find_md_links</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">markdown</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Generator</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#lookup.find_md_links" title="Permalink to this definition"></a></dt>
 <dd><p>Return list of tuples with hyperlinks in the markdown content.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -190,11 +190,11 @@
 </dd></dl>
 
 </section>
-<section id="module-src.validator">
-<span id="validator"></span><h1>Validator<a class="headerlink" href="#module-src.validator" title="Permalink to this heading"></a></h1>
+<section id="module-validator">
+<span id="validator"></span><h1>Validator<a class="headerlink" href="#module-validator" title="Permalink to this heading"></a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="src.validator.verify_hyperlinks_in_md">
-<span class="sig-prename descclassname"><span class="pre">src.validator.</span></span><span class="sig-name descname"><span class="pre">verify_hyperlinks_in_md</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.validator.verify_hyperlinks_in_md" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="validator.verify_hyperlinks_in_md">
+<span class="sig-prename descclassname"><span class="pre">validator.</span></span><span class="sig-name descname"><span class="pre">verify_hyperlinks_in_md</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#validator.verify_hyperlinks_in_md" title="Permalink to this definition"></a></dt>
 <dd><p>Get all hyperlinks in a markdown file and validate them in a pool of threads.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -204,8 +204,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.validator.check_all_md_files">
-<span class="sig-prename descclassname"><span class="pre">src.validator.</span></span><span class="sig-name descname"><span class="pre">check_all_md_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.validator.check_all_md_files" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="validator.check_all_md_files">
+<span class="sig-prename descclassname"><span class="pre">validator.</span></span><span class="sig-name descname"><span class="pre">check_all_md_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#validator.check_all_md_files" title="Permalink to this definition"></a></dt>
 <dd><p>Downloads all the markdown files from wiki and initiates individual validation process for each markdown file.</p>
 </dd></dl>
 
