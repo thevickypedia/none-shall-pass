@@ -30,11 +30,11 @@ jobs:
               print(1)
           ")
           if [ "$latest_tag" != "1" ]; then
-            echo "Tag '$latest_tag' already exists for version '$current_version'. Exiting."
-            echo "skip=true" >> $GITHUB_ENV
+            echo "Tag '$latest_tag' already exists for version '$current_version'. Skipping prerelease..."
+            echo "release=false" >> $GITHUB_ENV
             exit 0
           else
-            echo "skip=false" >> $GITHUB_ENV
+            echo "release=true" >> $GITHUB_ENV
             echo "No production ready tags were found for version '$current_version'"
           fi
           new_version="v$current_version-prerelease-$(date +%s)"
@@ -45,7 +45,7 @@ jobs:
         shell: bash
 
       - name: Create New Tag
-        if: env.skip == 'false'
+        if: env.release == 'true'
         run: |
           # Create a new tag with tag_name
           json_data="{\"tag\":\"${{ env.tag_name }}\",\"message\":\"${{ env.commit_msg }}\",\"object\":\"$(git rev-parse HEAD)\",\"type\":\"commit\"}"
@@ -63,7 +63,7 @@ jobs:
         shell: bash
 
       - name: Create New Release
-        if: env.skip == 'false'
+        if: env.release == 'true'
         run: |
           release_data="{\"tag_name\":\"${{ env.tag_name }}\",\"name\":\"${{ env.tag_name }}\",\"body\":\"${{ env.commit_msg }}\",\"draft\":false,\"prerelease\":true}"
           response=$(curl -X POST -H "Authorization: token ${{ secrets.GIT_TOKEN }}" \
