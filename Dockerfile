@@ -4,16 +4,15 @@ FROM python:3.11-alpine
 # Install git
 RUN apk add --no-cache git
 
-# Create a new directory in root and copy the module
-RUN mkdir /none-shall-pass
-COPY . /none-shall-pass
+# Copy package data to root
+COPY src/* /
 
 # Upgrade pip and install requests module
 RUN python -m pip install --upgrade pip
 RUN python -m pip install requests
 
-# Set working directory
-WORKDIR /none-shall-pass
+# Set validator.py as executable
+RUN chmod +x /validator.py
 
 # Set entrypoint for docker run
-ENTRYPOINT ["python", "./src/validator.py"]
+ENTRYPOINT ["python", "/validator.py"]
