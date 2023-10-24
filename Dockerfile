@@ -15,10 +15,10 @@ RUN python -m pip install --upgrade pip
 RUN python -m pip install requests
 
 # Set validator.py as executable
-RUN chmod +x /validator.py
+RUN chmod +x /opt/temp/validator.py
 
 # Set working directory
 WORKDIR /opt/temp
 
 # Set entrypoint for docker run
-ENTRYPOINT ["python", "./validator.py"]
+ENTRYPOINT ["python", "validator.py"]
