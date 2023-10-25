@@ -1,6 +1,18 @@
 Release Notes
 =============
 
+v1.0.8-prerelease-1698201597 (10/24/2023)
+-----------------------------------------
+- Set commit message to prerelease notes
+- Create steps for dedicated action in workflow
+- Use a token identifier for exit code
+- Bump version
+
+v1.0.8 (10/24/2023)
+-------------------
+- Includes minor updates to prerelease
+- Adds clear description on prerelease notes
+
 v1.0.7-prerelease-1698176010 (10/24/2023)
 -----------------------------------------
 - Creating a pre-release [v1.0.7-prerelease-1698176010] for 1.0.7
