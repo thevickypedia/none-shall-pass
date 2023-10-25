@@ -10,21 +10,6 @@ import git
 import lookup
 from logger import LOGGER
 
-OWNER = sys.argv[1]
-REPO = sys.argv[2]
-FAIL = sys.argv[3]
-DEBUG = sys.argv[4]
-EXCLUDE_HOSTNAMES = sys.argv[5]
-
-connection.exclusions.extend(list(filter(None, map(str.strip, EXCLUDE_HOSTNAMES.split(',')))))
-
-if DEBUG == "true":
-    LOGGER.setLevel(level=logging.DEBUG)
-else:
-    LOGGER.setLevel(level=logging.INFO)
-
-LOGGER.debug(connection.exclusions)
-
 
 def verify_hyperlinks_in_md(filename: str) -> None:
     """Get all hyperlinks in a markdown file and validate them in a pool of threads.
@@ -94,8 +79,19 @@ def check_all_md_files() -> None:
         sys.exit(1)
     elif _set_exit_code:
         LOGGER.exception("Setting exit code to 0, although there were errors")
-        sys.exit(0)
+    sys.exit(0)
 
 
 if __name__ == '__main__':
+    OWNER = sys.argv[1]
+    REPO = sys.argv[2]
+    FAIL = sys.argv[3]
+    DEBUG = sys.argv[4]
+    EXCLUDE_HOSTNAMES = sys.argv[5]
+    connection.exclusions.extend(list(filter(None, map(str.strip, EXCLUDE_HOSTNAMES.split(',')))))
+    if DEBUG == "true":
+        LOGGER.setLevel(level=logging.DEBUG)
+    else:
+        LOGGER.setLevel(level=logging.INFO)
+    LOGGER.debug(connection.exclusions)
     check_all_md_files()
