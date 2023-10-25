@@ -16,46 +16,63 @@ jobs:
         with:
             fetch-depth: 0
 
-      - name: Set version number
+      - name: Get current version
         run: |
-          current_version=$(python -c "import src; print(src.version)")
-          tag_list=$(git tag -l)
+          pkg_version=$(python -c "import src; print(src.version)")
+          echo "current_version=$pkg_version" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Set release flag
+        run: |
+          rel_token="$(date +%s)"
           latest_tag=$(python -c "
-          tag_list = '''$tag_list'''.lower().split('\n')
+          tag_list = '''$(git tag -l)'''.lower().split('\n')
           for version in tag_list:
-              if 'prerelease' not in version and '$current_version'.lower() in version:
+              if 'prerelease' not in version and '${{ env.current_version }}'.lower() in version:
                   print(version)
                   break
           else:
-              print(1)
+              print($rel_token)
           ")
-          if [ "$latest_tag" != "1" ]; then
-            echo "Tag '$latest_tag' already exists for version '$current_version'. Skipping prerelease..."
+          if [ "$latest_tag" == "$rel_token" ]; then
+            echo "release=true" >> $GITHUB_ENV
+            echo "No production ready tags were found for version '${{ env.current_version }}'"
+          else
+            echo "Tag '$latest_tag' already exists for version '${{ env.current_version }}'. Skipping prerelease..."
             echo "release=false" >> $GITHUB_ENV
             exit 0
-          else
-            echo "release=true" >> $GITHUB_ENV
-            echo "No production ready tags were found for version '$current_version'"
           fi
-          new_version="v$current_version-prerelease-$(date +%s)"
+        shell: bash
+
+      - name: Set tag_name
+        if: env.release == 'true'
+        run: |
+          new_version="v${{ env.current_version }}-prerelease-$(date +%s)"
           echo "tag_name=$new_version" >> $GITHUB_ENV
-          new_msg="Creating a pre-release [$new_version] for $current_version"
-          echo "commit_msg=$new_msg" >> $GITHUB_ENV
-          echo $new_msg
+        shell: bash
+
+      - name: Set commit message
+        if: env.release == 'true'
+        run: |
+          commit_notes=$(git log -1 --pretty=%B | tr -d '`')
+          trimmed=$(echo "$commit_notes" | tr -s '[:space:]' | sed ':a;N;$!ba;s/\n/\\n/g')
+          echo "commit_msg=$trimmed" >> $GITHUB_ENV
         shell: bash
 
       - name: Create New Tag
         if: env.release == 'true'
         run: |
-          # Create a new tag with tag_name
           json_data="{\"tag\":\"${{ env.tag_name }}\",\"message\":\"${{ env.commit_msg }}\",\"object\":\"$(git rev-parse HEAD)\",\"type\":\"commit\"}"
-          # Create a new tag with the tag_name
           response=$(curl -X POST -H "Authorization: token ${{ secrets.GIT_TOKEN }}" \
             -d "$json_data" \
             "https://api.github.com/repos/${{ github.repository_owner }}/${{ github.event.repository.name }}/git/tags")
-          tag_sha=$(echo "$response" | tr -d '\000-\037' | jq -r '.sha')
+          sha=$(echo "$response" | tr -d '\000-\037' | jq -r '.sha')
+          echo "tag_sha=$sha" >> $GITHUB_ENV
+        shell: bash
 
-          # Create a reference to the new tag
+      - name: Create Tag Reference
+        if: env.release == 'true'
+        run: |
           json_data="{\"ref\":\"refs/tags/${{ env.tag_name }}\",\"sha\":\"$tag_sha\"}"
           curl -X POST -H "Authorization: token ${{ secrets.GIT_TOKEN }}" \
             -d "$json_data" \
