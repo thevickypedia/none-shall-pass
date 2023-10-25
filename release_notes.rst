@@ -1,6 +1,26 @@
 Release Notes
 =============
 
+v2.0-prerelease-1698262793 (10/25/2023)
+---------------------------------------
+- Release v2.0
+- Update docs
+
+v2.0 (10/25/2023)
+-----------------
+- Includes option to allow users to specify the hostnames to be excluded despite broken links
+- Includes bug fix for empty home page in GitHub wiki
+
+v2.0a-prerelease-1698262370 (10/25/2023)
+----------------------------------------
+- Move argument assignment to main method
+
+v2.0a-prerelease-1698261829 (10/25/2023)
+----------------------------------------
+- Get exclude hostnames as user input
+- Handle an edge case scenario in subprocess errors
+- Update README.md
+
 v1.0.8-prerelease-1698201597 (10/24/2023)
 -----------------------------------------
 - Set commit message to prerelease notes
