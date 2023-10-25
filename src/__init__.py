@@ -1,2 +1,2 @@
 """Placeholder for the version number of the package."""
-version = "2.0a"
+version = "2.0"
