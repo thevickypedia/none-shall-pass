@@ -14,10 +14,16 @@ OWNER = sys.argv[1]
 REPO = sys.argv[2]
 FAIL = sys.argv[3]
 DEBUG = sys.argv[4]
+EXCLUDE_HOSTNAMES = sys.argv[5]
+
+connection.exclusions.extend(list(filter(None, map(str.strip, EXCLUDE_HOSTNAMES.split(',')))))
+
 if DEBUG == "true":
     LOGGER.setLevel(level=logging.DEBUG)
 else:
     LOGGER.setLevel(level=logging.INFO)
+
+LOGGER.debug(connection.exclusions)
 
 
 def verify_hyperlinks_in_md(filename: str) -> None:

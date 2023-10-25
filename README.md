@@ -43,13 +43,17 @@ jobs:
 
 Use the options below to configure debug and fail state when broken links are found in the repository/wiki pages.
 
-| option  | requirement | description                                                                                                                                              |
-|---------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `owner` | optional    | Owner/Organization of the repository - Defaults to current owner/org name                                                                                |
-| `repo`  | optional    | Name of the repository - Defaults to current repository's name                                                                                           |
-| `fail`  | optional    | If `true` (Default) the build is failed if broken links are found.<br/>If `false` the build completes successfully and warnings are provided in the logs |
-| `debug` | optional    | If `true` (Default is `false`) debug level logging is enabled                                                                                            |
+| option             | requirement | description                                                                                                                                              |
+|--------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `owner`            | optional    | Owner/Organization of the repository - Defaults to current owner/org name                                                                                |
+| `repo`             | optional    | Name of the repository - Defaults to current repository's name                                                                                           |
+| `fail`             | optional    | If `true` (Default) the build is failed if broken links are found.<br/>If `false` the build completes successfully and warnings are provided in the logs |
+| `debug`            | optional    | If `true` (Default is `false`) debug level logging is enabled                                                                                            |
+| `excludeHostnames` | optional    | Comma separated list of hostnames to ignore when failed                                                                                                  |
 
+> `excludeHostnames` will perform a regex like lookup, so wildcards (*) are not required and spaces don't matter<br>
+
+> To exclude any URL with `amazon`/`amzn` in it simply specify,<br>`excludeHostnames: "amazon,amzn"`
 
 ## [Release Notes][release-notes]
 **Requirement**

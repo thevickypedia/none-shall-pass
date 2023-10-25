@@ -1,31 +1,36 @@
-name: 'none-shall-pass'
-description: 'Run validations against hyperlinks in all markdown files (including Wiki pages)'
+name: none-shall-pass
+description: Run validations against hyperlinks in all markdown files (including Wiki pages)
 inputs:
   owner:
-    description: "Owner/Organization of the repository"
+    description: Owner/Organization of the repository
     required: false
     default: ${{ github.repository_owner }}
   repo:
-    description: "Name of the repository"
+    description: Name of the repository
     required: false
     default: ${{ github.event.repository.name }}
   fail:
-    description: "Flag to fail"
+    description: Flag to fail
     required: false
     default: "true"
   debug:
-    description: "Debug flag"
+    description: Debug flag
     required: false
     default: "false"
+  excludeHostnames:
+    description: Hostnames for which the failure should be ignored
+    required: false
+    default: ""
 outputs: {}
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: docker
+  image: Dockerfile
   args:
     - ${{ inputs.owner }}
     - ${{ inputs.repo }}
     - ${{ inputs.fail }}
     - ${{ inputs.debug }}
+    - ${{ inputs.excludeHostnames }}
 branding:
   icon: check-square
   color: gray-dark

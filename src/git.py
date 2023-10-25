@@ -24,7 +24,7 @@ def run_command(cmd: str) -> bool:
         subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, shell=True, check=True)
         return True
     except (subprocess.CalledProcessError, subprocess.SubprocessError, Exception) as error:
-        if isinstance(error, subprocess.CalledProcessError):
+        if hasattr(error, 'output') and error.output:
             result = error.output.decode(encoding='UTF-8').strip()
             LOGGER.warning("[%d]: %s", error.returncode, result or error.__str__())
         else:

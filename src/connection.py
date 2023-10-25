@@ -13,6 +13,8 @@ import requests
 
 from logger import LOGGER
 
+exclusions = ["localhost", "127.0.0.1", socket.gethostbyname('localhost')]
+
 
 def verify_url(hyperlink: Tuple[str, str], timeout: Tuple[int, int] = (3, 3)) -> None:
     """Make a GET request to the hyperlink for validation using requests module.
@@ -22,7 +24,7 @@ def verify_url(hyperlink: Tuple[str, str], timeout: Tuple[int, int] = (3, 3)) ->
         timeout: A tuple of connect timeout and read timeout.
 
     See Also:
-        - Ignores amazon and localhost URLs.
+        - Ignores localhost URLs.
         - Ignores URLs that return 429 status code.
         - Retries once with a longer connect and read timeout in case of a timeout error.
 
@@ -43,7 +45,7 @@ def verify_url(hyperlink: Tuple[str, str], timeout: Tuple[int, int] = (3, 3)) ->
         return verify_url(hyperlink, (10, 10))
     except requests.RequestException as error:
         LOGGER.debug(error)
-    if any(map(lambda keyword: keyword in url, ("amazon", "localhost", socket.gethostbyname('localhost')))):
-        LOGGER.warning("[%s] - '%s' - '%s' is broken", current_process().name, text, url)
+    if any(map(lambda keyword: keyword in url, exclusions)):
+        LOGGER.warning("[%s] - '%s' - '%s' is broken but excluded", current_process().name, text, url)
     else:
         raise ValueError(f"[{current_process().name}] - {text!r} - {url!r} is broken")
