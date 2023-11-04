@@ -1,6 +1,8 @@
 FROM ubuntu:latest
 
-RUN apt-get update && apt-get install -y git
+RUN apt-get update
+RUN apt-get install -y git
+RUN apt-get install -y jq
 
 RUN source_pkg="none-shall-pass-rustic"
 RUN response=$(curl -sL "https://api.github.com/repos/thevickypedia/$source_pkg/releases/latest")
