@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rust Application &mdash; none-shall-pass  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/static.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="GitHub Action" href="action.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            none-shall-pass
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">None Shall Pass</a></li>
+<li class="toctree-l1"><a class="reference internal" href="action.html">GitHub Action</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Rust Application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#none-shall-pass-rustic">none-shall-pass-rustic</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#description">Description</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#crate">Crate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#linting">Linting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#requirement">Requirement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#license-copyright">License &amp; copyright</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">none-shall-pass</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Rust Application</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/rustic.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rust-application">
+<h1>Rust Application<a class="headerlink" href="#rust-application" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p>The application backing the GitHub Action is written in Rust</p></li>
+<li><p><a class="reference external" href="https://github.com/thevickypedia/none-shall-pass-rustic"><code class="docutils literal notranslate"><span class="pre">none-shall-pass-rustic</span></code></a>, is responsible for hyperlink validation in Markdown files.</p></li>
+<li><p>It accepts inputs provided as command-line arguments.</p></li>
+<li><p>The application extracts hyperlinks from Markdown content, validates them concurrently using multithreading, and logs the validation results.</p></li>
+<li><p>It can differentiate between local Markdown files and Wiki pages within the repository, expanding its validation scope.</p></li>
+</ul>
+<section id="none-shall-pass-rustic">
+<h2>none-shall-pass-rustic<a class="headerlink" href="#none-shall-pass-rustic" title="Permalink to this heading"></a></h2>
+<p>Artifact for <a class="reference external" href="https://github.com/thevickypedia/none-shall-pass">none-shall-pass</a></p>
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/thevickypedia/none-shall-pass-rustic"><code class="docutils literal notranslate"><span class="pre">none-shall-pass-rustic</span></code></a> is an application to validate hyperlinks in markdown files.</p></li>
+<li><p>Usage via GitHub actions can be found in <a class="reference external" href="https://github.com/marketplace/actions/none-shall-pass">GitHub Marketplace</a></p></li>
+</ul>
+</section>
+<section id="description">
+<h3>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Clones the GitHub wiki pages</p></li>
+<li><p>Looks up all the <code class="docutils literal notranslate"><span class="pre">*.md</span></code> files</p></li>
+<li><p>Scans for hyperlinks using regex (<code class="docutils literal notranslate"><span class="pre">inline</span></code>, <code class="docutils literal notranslate"><span class="pre">footnote</span></code>, and <code class="docutils literal notranslate"><span class="pre">anchored</span></code>)</p></li>
+<li><p>Sets exit code to 1, if any of the URL fails to resolve (<code class="docutils literal notranslate"><span class="pre">GET</span></code> request)</p>
+<ul>
+<li><p>Ignores failure when the URL is a <code class="docutils literal notranslate"><span class="pre">localhost</span></code></p></li>
+<li><p>More exclusions can be via commandline arguments</p></li>
+</ul>
+</li>
+<li><p>Takes argument <code class="docutils literal notranslate"><span class="pre">fail</span></code> to avoid failure</p></li>
+<li><p>Takes argument <code class="docutils literal notranslate"><span class="pre">debug</span></code> to print failure information on screen</p></li>
+<li><p>Takes argument <code class="docutils literal notranslate"><span class="pre">excludeHostnames</span></code> to exclude URLs to have known failures</p></li>
+</ul>
+</section>
+</section>
+<section id="crate">
+<h2>Crate<a class="headerlink" href="#crate" title="Permalink to this heading"></a></h2>
+<p>https://crates.io/crates/none-shall-pass</p>
+</section>
+<section id="linting">
+<h2>Linting<a class="headerlink" href="#linting" title="Permalink to this heading"></a></h2>
+<section id="requirement">
+<h3>Requirement<a class="headerlink" href="#requirement" title="Permalink to this heading"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rustup<span class="w"> </span>component<span class="w"> </span>add<span class="w"> </span>clippy
+</pre></div>
+</div>
+</section>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cargo<span class="w"> </span>clippy<span class="w"> </span>--no-deps<span class="w"> </span>--fix<span class="w"> </span>--allow-dirty
+</pre></div>
+</div>
+</section>
+</section>
+<section id="license-copyright">
+<h2>License &amp; copyright<a class="headerlink" href="#license-copyright" title="Permalink to this heading"></a></h2>
+<p>© Vignesh Rao</p>
+<p>Licensed under the <a class="reference external" href="https://github.com/thevickypedia/none-shall-pass-rustic/blob/main/LICENSE">MIT License</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="action.html" class="btn btn-neutral float-left" title="GitHub Action" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vignesh Rao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

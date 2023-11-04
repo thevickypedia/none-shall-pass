@@ -5,9 +5,22 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-import sys
+import requests
 
-sys.path.insert(0, '../src')
+data = """# Rust Application\n\n
+- The application backing the GitHub Action is written in Rust
+- [``none-shall-pass-rustic``](https://github.com/thevickypedia/none-shall-pass-rustic), is responsible for hyperlink validation in Markdown files.
+- It accepts inputs provided as command-line arguments.
+- The application extracts hyperlinks from Markdown content, validates them concurrently using multithreading, and logs the validation results.
+- It can differentiate between local Markdown files and Wiki pages within the repository, expanding its validation scope.
+"""
+
+response = requests.get("https://raw.githubusercontent.com/thevickypedia/none-shall-pass-rustic/main/README.md")
+if response.ok:
+    data += f"\n\n#{response.text}"
+
+with open("rustic.md", "w") as file:
+    file.write(data)
 
 
 def setup(app):
@@ -27,6 +40,7 @@ author = 'Vignesh Rao'
 extensions = [
     'sphinx.ext.napoleon',  # certain styles of doc strings
     'sphinx.ext.autodoc',  # generates from doc strings
+    'recommonmark'
 ]
 
 # https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html#configuration

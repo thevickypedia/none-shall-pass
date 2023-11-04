@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>None Shall Pass &mdash; none-shall-pass  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/static.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GitHub Action" href="action.html" />
+    <link rel="prev" title="none-shall-pass - GitHub Action" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            none-shall-pass
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">None Shall Pass</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#install-guide">Install Guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#add-none-shall-pass-action-to-your-build-workflow">Add <code class="docutils literal notranslate"><span class="pre">none-shall-pass</span></code> action to your build workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#action-configuration-options">Action configuration options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#release-notes">Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#docs">Docs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#license-copyright">License &amp; copyright</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="action.html">GitHub Action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rustic.html">Rust Application</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">none-shall-pass</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">None Shall Pass</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p><a class="reference external" href="https://github.com/marketplace/actions/none-shall-pass"><img alt="made-with-gha" src="https://img.shields.io/badge/Made%20with-Github_Actions-black?style=for-the-badge&amp;logo=GitHub" /></a></p>
+<p><a class="reference external" href="https://github.com/thevickypedia/none-shall-pass/actions/workflows/pages/pages-build-deployment"><img alt="pages" src="https://github.com/thevickypedia/none-shall-pass/actions/workflows/pages/pages-build-deployment/badge.svg" /></a></p>
+<section id="none-shall-pass">
+<h1>None Shall Pass<a class="headerlink" href="#none-shall-pass" title="Permalink to this heading"></a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">none-shall-pass</span></code> is a GitHub action designed to identify and flag any broken links
+within markdown files in your repository and wiki pages.</p>
+<section id="install-guide">
+<h2>Install Guide<a class="headerlink" href="#install-guide" title="Permalink to this heading"></a></h2>
+<section id="add-none-shall-pass-action-to-your-build-workflow">
+<h3>Add <code class="docutils literal notranslate"><span class="pre">none-shall-pass</span></code> action to your build workflow<a class="headerlink" href="#add-none-shall-pass-action-to-your-build-workflow" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>In your GitHub repository, select the Actions tab and either add or edit a workflow.</p></li>
+<li><p>Search for <code class="docutils literal notranslate"><span class="pre">none-shall-pass</span></code> from the <a class="reference external" href="https://github.com/marketplace/actions/none-shall-pass">Marketplace</a> tab on the right.</p></li>
+<li><p>Copy and paste the yaml into your workflow.</p></li>
+</ul>
+<p><img alt="marketplace" src="https://raw.githubusercontent.com/thevickypedia/none-shall-pass/main/images/marketplace.png" /></p>
+<p>Copy &amp; paste the following workflow definition into your project <code class="docutils literal notranslate"><span class="pre">.github/workflows/none-shall-pass.yml</span></code></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># This workflow checks out code and scans the hyperlinks in </span>
+<span class="c1"># markdown files for broken links</span>
+
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Validate hyperlinks in markdown files</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">none-shall-pass</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v3</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thevickypedia/none-shall-pass@v2.0</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Commit your changes to trigger the workflow or run the workflow manually.</p></li>
+</ul>
+</section>
+<section id="action-configuration-options">
+<h3>Action configuration options<a class="headerlink" href="#action-configuration-options" title="Permalink to this heading"></a></h3>
+<p>Use the options below to configure debug and fail state when broken links are found in the repository/wiki pages.</p>
+<p>| option             | requirement | description                                                                                                                                              |
+|——————–|————-|———————————————————————————————————————————————————-|
+| <code class="docutils literal notranslate"><span class="pre">owner</span></code>            | optional    | Owner/Organization of the repository - Defaults to current owner/org name                                                                                |
+| <code class="docutils literal notranslate"><span class="pre">repo</span></code>             | optional    | Name of the repository - Defaults to current repository’s name                                                                                           |
+| <code class="docutils literal notranslate"><span class="pre">fail</span></code>             | optional    | If <code class="docutils literal notranslate"><span class="pre">true</span></code> (Default) the build is failed if broken links are found.<br/>If <code class="docutils literal notranslate"><span class="pre">false</span></code> the build completes successfully and warnings are provided in the logs |
+| <code class="docutils literal notranslate"><span class="pre">debug</span></code>            | optional    | If <code class="docutils literal notranslate"><span class="pre">true</span></code> (Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>) debug level logging is enabled                                                                                            |
+| <code class="docutils literal notranslate"><span class="pre">excludeHostnames</span></code> | optional    | Comma separated list of hostnames to ignore when failed                                                                                                  |</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">excludeHostnames</span></code> will perform a regex like lookup, so wildcards (*) are not required and spaces don’t matter<br></p>
+</div></blockquote>
+<blockquote>
+<div><p>To exclude any URL with <code class="docutils literal notranslate"><span class="pre">amazon</span></code>/<code class="docutils literal notranslate"><span class="pre">amzn</span></code> in it simply specify,<br><code class="docutils literal notranslate"><span class="pre">excludeHostnames:</span> <span class="pre">&quot;amazon,amzn&quot;</span></code></p>
+</div></blockquote>
+</section>
+</section>
+<section id="release-notes">
+<h2><a class="reference external" href="https://github.com/thevickypedia/none-shall-pass/blob/main/release_notes.rst">Release Notes</a><a class="headerlink" href="#release-notes" title="Permalink to this heading"></a></h2>
+<p><strong>Requirement</strong></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>gitverse
+</pre></div>
+</div>
+<p><strong>Usage</strong></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>gitverse-release<span class="w"> </span>reverse<span class="w"> </span>-f<span class="w"> </span>release_notes.rst<span class="w"> </span>-t<span class="w"> </span><span class="s1">&#39;Release Notes&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="docs">
+<h2><a class="reference external" href="https://thevickypedia.github.io/none-shall-pass/">Docs</a><a class="headerlink" href="#docs" title="Permalink to this heading"></a></h2>
+<p><strong>Requirement</strong></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">sphinx</span><span class="o">==</span><span class="m">5</span>.1.1<span class="w"> </span>sphinx-rtd-theme<span class="w"> </span>recommonmark<span class="w"> </span>requests
+</pre></div>
+</div>
+<p><strong>Usage</strong></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>pre_commit.sh
+</pre></div>
+</div>
+</section>
+<section id="license-copyright">
+<h2>License &amp; copyright<a class="headerlink" href="#license-copyright" title="Permalink to this heading"></a></h2>
+<p>© Vignesh Rao</p>
+<p>Licensed under the <a class="reference external" href="https://github.com/thevickypedia/none-shall-pass/blob/main/LICENSE">MIT License</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="none-shall-pass - GitHub Action" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="action.html" class="btn btn-neutral float-right" title="GitHub Action" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vignesh Rao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

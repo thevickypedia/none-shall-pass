@@ -21,7 +21,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="GitHub Action" href="action.html" /> 
+    <link rel="next" title="None Shall Pass" href="README.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,7 +44,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">None Shall Pass</a></li>
 <li class="toctree-l1"><a class="reference internal" href="action.html">GitHub Action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rustic.html">Rust Application</a></li>
 </ul>
 
         </div>
@@ -75,136 +77,27 @@
 <h1>none-shall-pass - GitHub Action<a class="headerlink" href="#none-shall-pass-github-action" title="Permalink to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">None Shall Pass</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="README.html#install-guide">Install Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#release-notes">Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#docs">Docs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#license-copyright">License &amp; copyright</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="action.html">GitHub Action</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="action.html#configuration-metadata">Configuration MetaData</a></li>
 <li class="toctree-l2"><a class="reference internal" href="action.html#docker-setup">Docker Setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="action.html#validator">Validator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rustic.html">Rust Application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rustic.html#none-shall-pass-rustic">none-shall-pass-rustic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rustic.html#crate">Crate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rustic.html#linting">Linting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rustic.html#license-copyright">License &amp; copyright</a></li>
 </ul>
 </li>
 </ul>
 </div>
-</section>
-<section id="module-connection">
-<span id="connection"></span><h1>Connection<a class="headerlink" href="#module-connection" title="Permalink to this heading"></a></h1>
-<p>Handles connections to the URLs in a pool of threads.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Connection</span>
-</pre></div>
-</div>
-<dl class="py function">
-<dt class="sig sig-object py" id="connection.verify_url">
-<span class="sig-prename descclassname"><span class="pre">connection.</span></span><span class="sig-name descname"><span class="pre">verify_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hyperlink</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(3,</span> <span class="pre">3)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#connection.verify_url" title="Permalink to this definition"></a></dt>
-<dd><p>Make a GET request to the hyperlink for validation using requests module.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>hyperlink</strong> – Takes a tuple of the name and URL.</p></li>
-<li><p><strong>timeout</strong> – A tuple of connect timeout and read timeout.</p></li>
-</ul>
-</dd>
-</dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<ul class="simple">
-<li><p>Ignores localhost URLs.</p></li>
-<li><p>Ignores URLs that return 429 status code.</p></li>
-<li><p>Retries once with a longer connect and read timeout in case of a timeout error.</p></li>
-</ul>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>ValueError</strong> – When a particular URL is unreachable.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
-<section id="module-git">
-<span id="git"></span><h1>Git<a class="headerlink" href="#module-git" title="Permalink to this heading"></a></h1>
-<p>Runs git command using subprocess module.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Git</span>
-</pre></div>
-</div>
-<dl class="py function">
-<dt class="sig sig-object py" id="git.run_command">
-<span class="sig-prename descclassname"><span class="pre">git.</span></span><span class="sig-name descname"><span class="pre">run_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#git.run_command" title="Permalink to this definition"></a></dt>
-<dd><p>Run git command to clone wiki locally and handle exceptions from subprocess module.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>cmd</strong> – Takes the command as an argument.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A boolean flag to indicate the status.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
-<section id="module-logger">
-<span id="logger"></span><h1>Logger<a class="headerlink" href="#module-logger" title="Permalink to this heading"></a></h1>
-<p>Configures a Python logger with a stream handler.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Logger</span>
-</pre></div>
-</div>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<ul class="simple">
-<li><p>This is a customized logger allowing log messages to be displayed in the console.</p></li>
-<li><p>Logger includes information about the log level, function name, and line number.</p></li>
-</ul>
-</div>
-</section>
-<section id="module-lookup">
-<span id="lookup"></span><h1>Lookup<a class="headerlink" href="#module-lookup" title="Permalink to this heading"></a></h1>
-<p>Handles lookup for hyperlinks in markdown files using regex search.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Lookup</span>
-</pre></div>
-</div>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">INLINE_LINK_RE</span></code> is a regular expression for matching inline links in the format [text](URL).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">FOOTNOTE_LINK_TEXT_RE</span></code> is a regular expression for matching footnote links in the format [text][number].</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">FOOTNOTE_LINK_URL_RE</span></code> is a regular expression for matching footnote URLs in the format [number]: URL.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ANCHORED_LINK_RE</span></code> is a regular expression for matching anchored links in the format [text]: URL.</p></li>
-</ul>
-</div>
-<dl class="py function">
-<dt class="sig sig-object py" id="lookup.find_md_links">
-<span class="sig-prename descclassname"><span class="pre">lookup.</span></span><span class="sig-name descname"><span class="pre">find_md_links</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">markdown</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Generator</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#lookup.find_md_links" title="Permalink to this definition"></a></dt>
-<dd><p>Return list of tuples with hyperlinks in the markdown content.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>markdown</strong> – Data from markdown file.</p>
-</dd>
-<dt class="field-even">Yields<span class="colon">:</span></dt>
-<dd class="field-even"><p><em>Tuple[str, str]</em> – Tuple of the string and the associated URL.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
-<section id="module-validator">
-<span id="validator"></span><h1>Validator<a class="headerlink" href="#module-validator" title="Permalink to this heading"></a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="validator.verify_hyperlinks_in_md">
-<span class="sig-prename descclassname"><span class="pre">validator.</span></span><span class="sig-name descname"><span class="pre">verify_hyperlinks_in_md</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#validator.verify_hyperlinks_in_md" title="Permalink to this definition"></a></dt>
-<dd><p>Get all hyperlinks in a markdown file and validate them in a pool of threads.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>filename</strong> – Name of the markdown file to be validated.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="validator.check_all_md_files">
-<span class="sig-prename descclassname"><span class="pre">validator.</span></span><span class="sig-name descname"><span class="pre">check_all_md_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#validator.check_all_md_files" title="Permalink to this definition"></a></dt>
-<dd><p>Downloads all the markdown files from wiki and initiates individual validation process for each markdown file.</p>
-</dd></dl>
-
 </section>
 <section id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading"></a></h1>
@@ -219,7 +112,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="action.html" class="btn btn-neutral float-right" title="GitHub Action" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="README.html" class="btn btn-neutral float-right" title="None Shall Pass" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

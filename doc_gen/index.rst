@@ -9,37 +9,9 @@ none-shall-pass - GitHub Action
 .. toctree::
    :maxdepth: 2
 
+   README
    action
-
-Connection
-==========
-.. automodule:: connection
-   :members:
-   :undoc-members:
-
-Git
-===
-.. automodule:: git
-   :members:
-   :undoc-members:
-
-Logger
-======
-.. automodule:: logger
-   :members:
-   :undoc-members:
-
-Lookup
-======
-.. automodule:: lookup
-   :members:
-   :undoc-members:
-
-Validator
-=========
-.. automodule:: validator
-   :members:
-   :undoc-members:
+   rustic
 
 Indices and tables
 ==================
