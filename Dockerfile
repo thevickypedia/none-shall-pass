@@ -2,8 +2,6 @@ FROM ubuntu:latest
 
 RUN apt-get update && apt-get install -y git
 
-COPY src/run.sh /run.sh
-
 RUN source_pkg="none-shall-pass-rustic" && \
     response=$(curl -sL "https://api.github.com/repos/thevickypedia/$source_pkg/releases/latest") && \
     release_id=$(echo "$response" | jq -r '.id') && \
