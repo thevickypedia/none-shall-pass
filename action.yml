@@ -45,7 +45,7 @@ runs:
       shell: bash
 
     - name: Run Asset
-      run: ./asset ${{ inputs.owner }} ${{ inputs.repo }} ${{ inputs.fail }} ${{ inputs.debug }} ${{ inputs.excludeHostnames }}
+      run: ./asset ${{ inputs.owner }} ${{ inputs.repo }} ${{ inputs.fail }} ${{ inputs.debug }} "${{ inputs.excludeHostnames }}"
       shell: bash
 
 branding:
