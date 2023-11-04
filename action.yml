@@ -23,14 +23,23 @@ inputs:
     default: ""
 outputs: {}
 runs:
-  using: docker
-  image: Dockerfile
-  args:
-    - ${{ inputs.owner }}
-    - ${{ inputs.repo }}
-    - ${{ inputs.fail }}
-    - ${{ inputs.debug }}
-    - ${{ inputs.excludeHostnames }}
+  using: composite
+  steps:
+    - name: Run none-shall-pass
+      run: |
+          response=$(curl -sL "https://api.github.com/repos/thevickypedia/none-shall-pass-rustic/releases/latest")
+          release_id=$(echo "$response" | jq -r '.id')
+          tag_name=$(echo "$response" | jq -r '.tag_name')
+          published_at=$(echo "$response" | jq -r '.published_at')
+          asset_id=$(echo "$response" | jq -r '.assets[0].id')
+          echo "'none-shall-pass-rustic' $tag_name publised at $published_at"
+          echo "Latest Release ID: $release_id"
+          echo "Asset ID: $asset_id"
+          # download_url="https://api.github.com/repos/thevickypedia/none-shall-pass-rustic/releases/assets/$asset_id"
+          download_url=$(echo "$response" | jq -r '.assets[0].browser_download_url')
+          curl -o asset -LH "Accept: application/octet-stream" "$download_url"
+          chmod +x asset
+          ./asset ${{ inputs.owner }} ${{ inputs.repo }} ${{ inputs.fail }} ${{ inputs.debug }} ${{ inputs.excludeHostnames }}
 branding:
   icon: check-square
   color: gray-dark
