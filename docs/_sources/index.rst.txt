@@ -10,7 +10,6 @@ none-shall-pass - GitHub Action
    :maxdepth: 2
 
    README
-   action
    rustic
 
 Indices and tables
