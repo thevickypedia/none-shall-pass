@@ -7,13 +7,7 @@
 
 import requests
 
-data = """# Rust Application\n\n
-- The application backing the GitHub Action is written in Rust
-- [``none-shall-pass-rustic``](https://github.com/thevickypedia/none-shall-pass-rustic), is responsible for hyperlink validation in Markdown files.
-- It accepts inputs provided as command-line arguments.
-- The application extracts hyperlinks from Markdown content, validates them concurrently using multithreading, and logs the validation results.
-- It can differentiate between local Markdown files and Wiki pages within the repository, expanding its validation scope.
-"""
+data = "# Rust Application\n\n"
 
 response = requests.get("https://raw.githubusercontent.com/thevickypedia/none-shall-pass-rustic/main/README.md")
 if response.ok:

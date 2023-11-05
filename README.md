@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: thevickypedia/none-shall-pass@v2.0
-      # - uses: thevickypedia/none-shall-pass@v3.0a  # Backed by a Rust application (alpha stage)
+      # - uses: thevickypedia/none-shall-pass@v3a  # Backed by a Rust application (alpha stage)
 ```
 
 - Commit your changes to trigger the workflow or run the workflow manually.
