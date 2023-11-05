@@ -1,5 +1,8 @@
 name: auto-release
 
+env:
+  version: 3.0a
+
 on:
   workflow_dispatch:
   push:
@@ -16,19 +19,13 @@ jobs:
         with:
             fetch-depth: 0
 
-      - name: Get current version
-        run: |
-          pkg_version=$(python -c "import src; print(src.version)")
-          echo "current_version=$pkg_version" >> $GITHUB_ENV
-        shell: bash
-
       - name: Set release flag
         run: |
           rel_token="$(date +%s)"
           latest_tag=$(python -c "
           tag_list = '''$(git tag -l)'''.lower().split('\n')
           for version in tag_list:
-              if 'prerelease' not in version and '${{ env.current_version }}'.lower() in version:
+              if 'prerelease' not in version and '${{ env.version }}'.lower() in version:
                   print(version)
                   break
           else:
@@ -36,9 +33,9 @@ jobs:
           ")
           if [ "$latest_tag" == "$rel_token" ]; then
             echo "release=true" >> $GITHUB_ENV
-            echo "No production ready tags were found for version '${{ env.current_version }}'"
+            echo "No production ready tags were found for version '${{ env.version }}'"
           else
-            echo "Tag '$latest_tag' already exists for version '${{ env.current_version }}'. Skipping prerelease..."
+            echo "Tag '$latest_tag' already exists for version '${{ env.version }}'. Skipping prerelease..."
             echo "release=false" >> $GITHUB_ENV
             exit 0
           fi
@@ -47,7 +44,7 @@ jobs:
       - name: Set tag_name
         if: env.release == 'true'
         run: |
-          new_version="v${{ env.current_version }}-prerelease-$(date +%s)"
+          new_version="v${{ env.version }}-prerelease-$(date +%s)"
           echo "tag_name=$new_version" >> $GITHUB_ENV
         shell: bash
 

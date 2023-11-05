@@ -9,7 +9,7 @@ within markdown files in your repository and wiki pages.
 
 ## Install Guide
 
-### Add `none-shall-pass` action to your build workflow
+#### Add `none-shall-pass` action to your build workflow
 
 - In your GitHub repository, select the Actions tab and either add or edit a workflow.
 - Search for `none-shall-pass` from the [Marketplace][marketplace] tab on the right.
@@ -20,9 +20,6 @@ within markdown files in your repository and wiki pages.
 Copy & paste the following workflow definition into your project `.github/workflows/none-shall-pass.yml`
 
 ```yaml
-# This workflow checks out code and scans the hyperlinks in 
-# markdown files for broken links
-
 name: Validate hyperlinks in markdown files
 
 on:
@@ -33,8 +30,8 @@ jobs:
   none-shall-pass:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
       - uses: thevickypedia/none-shall-pass@v2.0
+      # - uses: thevickypedia/none-shall-pass@v3.0a  # Backed by a Rust application (alpha stage)
 ```
 
 - Commit your changes to trigger the workflow or run the workflow manually.
