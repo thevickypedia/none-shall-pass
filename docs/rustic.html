@@ -95,10 +95,10 @@
 <h3>Summary<a class="headerlink" href="#summary" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/thevickypedia/none-shall-pass-rustic"><code class="docutils literal notranslate"><span class="pre">none-shall-pass-rustic</span></code></a> is an application written in Rust.</p></li>
-<li><p>This application validates hyperlinks in markdown files.</p></li>
-<li><p>It accepts inputs provided as command-line arguments.</p></li>
-<li><p>The application extracts hyperlinks from Markdown content, validates them concurrently using multithreading, and logs the validation results.</p></li>
-<li><p>It can differentiate between local Markdown files and Wiki pages within the repository, expanding its validation scope.</p></li>
+<li><p>Validates hyperlinks in markdown files.</p></li>
+<li><p>Accepts inputs provided as command-line arguments.</p></li>
+<li><p>Extracts hyperlinks from Markdown content, validates them concurrently using multithreading, and logs the validation results.</p></li>
+<li><p>Differentiates between local Markdown files and Wiki pages within the repository, expanding its validation scope.</p></li>
 <li><p>Usage via GitHub actions can be found in <a class="reference external" href="https://github.com/marketplace/actions/none-shall-pass">GitHub Marketplace</a></p></li>
 </ul>
 </section>
@@ -111,12 +111,12 @@
 <li><p>Sets exit code to 1, if any of the URL fails to resolve (<code class="docutils literal notranslate"><span class="pre">GET</span></code> request)</p>
 <ul>
 <li><p>Ignores failure when the URL is a <code class="docutils literal notranslate"><span class="pre">localhost</span></code></p></li>
-<li><p>More exclusions can be via commandline arguments</p></li>
+<li><p>More exclusions can be added via commandline argument</p></li>
 </ul>
 </li>
-<li><p>Takes argument <code class="docutils literal notranslate"><span class="pre">fail</span></code> to avoid failure</p></li>
-<li><p>Takes argument <code class="docutils literal notranslate"><span class="pre">debug</span></code> to print failure information on screen</p></li>
-<li><p>Takes argument <code class="docutils literal notranslate"><span class="pre">excludeHostnames</span></code> to exclude URLs to have known failures</p></li>
+<li><p>Takes argument <code class="docutils literal notranslate"><span class="pre">fail</span></code> <em>(as boolean)</em> to avoid failure</p></li>
+<li><p>Takes argument <code class="docutils literal notranslate"><span class="pre">debug</span></code> <em>(as boolean)</em> to enable debug level logging</p></li>
+<li><p>Takes argument <code class="docutils literal notranslate"><span class="pre">excludeHostnames</span></code> <em>(as comma separated list)</em> to exclude URLs to have known failures</p></li>
 </ul>
 </section>
 </section>

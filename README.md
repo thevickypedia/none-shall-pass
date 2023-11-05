@@ -30,8 +30,8 @@ jobs:
   none-shall-pass:
     runs-on: ubuntu-latest
     steps:
-      - uses: thevickypedia/none-shall-pass@v2.0
-      # - uses: thevickypedia/none-shall-pass@v3a  # Backed by a Rust application (alpha stage)
+      - uses: thevickypedia/none-shall-pass@v2.0  # Powered by Python
+      # - uses: thevickypedia/none-shall-pass@v3  # Powered by Rust
 ```
 
 - Commit your changes to trigger the workflow or run the workflow manually.
