@@ -1,6 +1,14 @@
 Release Notes
 =============
 
+v3a
+---
+- Onboard none-shall-pass-rustic
+- Remove Dockerfile and python dependencies
+- Run scans via executable directly to reduce runtime
+- Improves speed and accuracy
+- Alpha stage tests
+
 v3.0a-prerelease-1699121888 (11/04/2023)
 ----------------------------------------
 - Bump checkout to v3

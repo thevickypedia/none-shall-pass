@@ -30,7 +30,6 @@ runs:
 
     - name: Get Latest Release
       id: get-latest-release
-      description: Pulls latest version of the rust application everytime and runs it as an executable
       run: |
         response=$(curl -sL "https://api.github.com/repos/thevickypedia/none-shall-pass-rustic/releases/latest")
         release_id=$(echo "$response" | jq -r '.id')

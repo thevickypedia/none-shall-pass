@@ -1,7 +1,7 @@
 name: auto-release
 
 env:
-  version: 3.0a
+  version: 3a
 
 on:
   workflow_dispatch:
