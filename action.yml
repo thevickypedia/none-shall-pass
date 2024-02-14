@@ -1,6 +1,10 @@
 name: none-shall-pass
 description: Run validations against hyperlinks in all markdown files (including Wiki pages)
 inputs:
+  debug:
+    description: Debug flag
+    required: false
+    default: "false"
   owner:
     description: Owner/Organization of the repository
     required: false
@@ -9,14 +13,6 @@ inputs:
     description: Name of the repository
     required: false
     default: ${{ github.event.repository.name }}
-  fail:
-    description: Flag to fail
-    required: false
-    default: "true"
-  debug:
-    description: Debug flag
-    required: false
-    default: "false"
   excludeHostnames:
     description: Hostnames for which the failure should be ignored
     required: false
@@ -26,7 +22,7 @@ runs:
   using: composite
   steps:
     - name: Checkout Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Get Latest Release
       id: get-latest-release
@@ -45,7 +41,7 @@ runs:
       shell: bash
 
     - name: Run Asset
-      run: ./asset ${{ inputs.owner }} ${{ inputs.repo }} ${{ inputs.fail }} ${{ inputs.debug }} "${{ inputs.excludeHostnames }}"
+      run: ./asset --debug ${{ inputs.debug }} --owner ${{ inputs.owner }} --repo ${{ inputs.repo }} --exclude "${{ inputs.excludeHostnames }}"
       shell: bash
 
 branding:

@@ -1,7 +1,7 @@
 name: auto-release
 
 env:
-  version: 3a
+  version: 4a
 
 on:
   workflow_dispatch:
@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
             fetch-depth: 0
 
