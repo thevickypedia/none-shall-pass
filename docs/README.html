@@ -113,7 +113,7 @@ within markdown files in your repository and wiki pages.</p>
 <span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
 <span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thevickypedia/none-shall-pass@v2.0</span><span class="w">  </span><span class="c1"># Powered by Python</span>
-<span class="w">      </span><span class="c1"># - uses: thevickypedia/none-shall-pass@v3  # Powered by Rust</span>
+<span class="w">      </span><span class="c1"># - uses: thevickypedia/none-shall-pass@v4  # Powered by Rust</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -130,10 +130,10 @@ within markdown files in your repository and wiki pages.</p>
 | <code class="docutils literal notranslate"><span class="pre">repo</span></code>             | optional    | Name of the repository - Defaults to current repository’s name            |
 | <code class="docutils literal notranslate"><span class="pre">excludeHostnames</span></code> | optional    | Space separated list of hostnames to ignore when failed                   |</p>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">excludeHostnames</span></code> will perform a regex like lookup, so wildcards (*) are not required and spaces don’t matter<br></p>
+<div><p><code class="docutils literal notranslate"><span class="pre">excludeHostnames</span></code> will perform a regex like lookup, so wildcards (*) are not required<br></p>
 </div></blockquote>
 <blockquote>
-<div><p>To exclude any URL with <code class="docutils literal notranslate"><span class="pre">amazon</span></code>/<code class="docutils literal notranslate"><span class="pre">amzn</span></code> in it simply specify,<br><code class="docutils literal notranslate"><span class="pre">excludeHostnames:</span> <span class="pre">&quot;amazon,amzn&quot;</span></code></p>
+<div><p>To exclude any URL with <code class="docutils literal notranslate"><span class="pre">amazon</span></code>/<code class="docutils literal notranslate"><span class="pre">amzn</span></code> in it simply specify,<br><code class="docutils literal notranslate"><span class="pre">excludeHostnames:</span> <span class="pre">&quot;amazon</span> <span class="pre">amzn&quot;</span></code></p>
 </div></blockquote>
 </section>
 </section>

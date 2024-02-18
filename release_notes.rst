@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+v4 (02/14/2024)
+---------------
+- Onboard command line interface creation kit
+
 v3 (11/05/2023)
 ---------------
 - Onboard none-shall-pass-rustic

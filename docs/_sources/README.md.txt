@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: thevickypedia/none-shall-pass@v2.0  # Powered by Python
-      # - uses: thevickypedia/none-shall-pass@v3  # Powered by Rust
+      # - uses: thevickypedia/none-shall-pass@v4  # Powered by Rust
 ```
 
 - Commit your changes to trigger the workflow or run the workflow manually.
@@ -47,9 +47,9 @@ Use the options below to configure debug and fail state when broken links are fo
 | `repo`             | optional    | Name of the repository - Defaults to current repository's name            |
 | `excludeHostnames` | optional    | Space separated list of hostnames to ignore when failed                   |
 
-> `excludeHostnames` will perform a regex like lookup, so wildcards (*) are not required and spaces don't matter<br>
+> `excludeHostnames` will perform a regex like lookup, so wildcards (*) are not required<br>
 
-> To exclude any URL with `amazon`/`amzn` in it simply specify,<br>`excludeHostnames: "amazon,amzn"`
+> To exclude any URL with `amazon`/`amzn` in it simply specify,<br>`excludeHostnames: "amazon amzn"`
 
 ## [Release Notes][release-notes]
 **Requirement**
