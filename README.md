@@ -30,7 +30,7 @@ jobs:
   none-shall-pass:
     runs-on: ubuntu-latest
     steps:
-      - uses: thevickypedia/none-shall-pass@v3
+      - uses: thevickypedia/none-shall-pass@v4
 ```
 
 - Commit your changes to trigger the workflow or run the workflow manually.
