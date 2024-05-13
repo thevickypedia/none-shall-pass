@@ -1,10 +1,6 @@
 name: none-shall-pass
 description: Run validations against hyperlinks in all markdown files (including Wiki pages)
 inputs:
-  debug:
-    description: Debug flag
-    required: false
-    default: "false"
   owner:
     description: Owner/Organization of the repository
     required: false
@@ -13,6 +9,14 @@ inputs:
     description: Name of the repository
     required: false
     default: ${{ github.event.repository.name }}
+  fail:
+    description: Flag to fail the action if error occurs
+    required: false
+    default: "true"
+  debug:
+    description: Debug flag
+    required: false
+    default: "false"
   excludeHostnames:
     description: Hostnames for which the failure should be ignored
     required: false
@@ -23,11 +27,13 @@ runs:
   steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
     - name: Get Latest Release
       id: get-latest-release
       run: |
-        response=$(curl -sL "https://api.github.com/repos/thevickypedia/none-shall-pass-rustic/releases/v0.1.4")
+        response=$(curl -sL "https://api.github.com/repos/thevickypedia/none-shall-pass-rustic/releases/tags/v0.1.4")
         release_id=$(echo "$response" | jq -r '.id')
         tag_name=$(echo "$response" | jq -r '.tag_name')
         published_at=$(echo "$response" | jq -r '.published_at')
@@ -41,7 +47,7 @@ runs:
       shell: bash
 
     - name: Run Asset
-      run: ./asset --debug ${{ inputs.debug }} --owner ${{ inputs.owner }} --repo ${{ inputs.repo }} --exclude "${{ inputs.excludeHostnames }}"
+      run: ./asset ${{ inputs.owner }} ${{ inputs.repo }} ${{ inputs.fail }} ${{ inputs.debug }} "${{ inputs.excludeHostnames }}"
       shell: bash
 
 branding:
