@@ -27,7 +27,7 @@ runs:
     - name: Get Latest Release
       id: get-latest-release
       run: |
-        response=$(curl -sL "https://api.github.com/repos/thevickypedia/none-shall-pass-rustic/releases/latest")
+        response=$(curl -sL "https://api.github.com/repos/thevickypedia/none-shall-pass-rustic/releases/v0.1.4")
         release_id=$(echo "$response" | jq -r '.id')
         tag_name=$(echo "$response" | jq -r '.tag_name')
         published_at=$(echo "$response" | jq -r '.published_at')

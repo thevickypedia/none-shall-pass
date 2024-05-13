@@ -2,9 +2,6 @@ name: auto-release
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
 
 jobs:
   auto_release:
