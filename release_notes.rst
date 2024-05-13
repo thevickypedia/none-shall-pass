@@ -1,21 +1,12 @@
 Release Notes
 =============
 
-v4 (02/14/2024)
----------------
-- Onboard command line interface creation kit
-
-v3 (11/05/2023)
+v3 (05/13/2024)
 ---------------
 - Onboard none-shall-pass-rustic
 - Remove Dockerfile and python dependencies
 - Run scans via executable directly to reduce runtime
 - Improves speed and accuracy
-- Alpha stage tests
-
-v3.0a-prerelease-1699121888 (11/04/2023)
-----------------------------------------
-- Bump checkout to v3
 
 v2.0-prerelease-1698262793 (10/25/2023)
 ---------------------------------------

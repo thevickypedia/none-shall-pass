@@ -15,7 +15,7 @@ within markdown files in your repository and wiki pages.
 - Search for `none-shall-pass` from the [Marketplace][marketplace] tab on the right.
 - Copy and paste the yaml into your workflow.
 
-![marketplace][screenshot]
+**[OR]**
 
 Copy & paste the following workflow definition into your project `.github/workflows/none-shall-pass.yml`
 
@@ -30,8 +30,7 @@ jobs:
   none-shall-pass:
     runs-on: ubuntu-latest
     steps:
-      - uses: thevickypedia/none-shall-pass@v2.0  # Powered by Python
-      # - uses: thevickypedia/none-shall-pass@v4  # Powered by Rust
+      - uses: thevickypedia/none-shall-pass@v3
 ```
 
 - Commit your changes to trigger the workflow or run the workflow manually.
@@ -80,7 +79,6 @@ bash pre_commit.sh
 Licensed under the [MIT License][license]
 
 [marketplace]: https://github.com/marketplace/actions/none-shall-pass
-[screenshot]: https://raw.githubusercontent.com/thevickypedia/none-shall-pass/main/images/marketplace.png
 [license]: https://github.com/thevickypedia/none-shall-pass/blob/main/LICENSE
 [release-notes]: https://github.com/thevickypedia/none-shall-pass/blob/main/release_notes.rst
 [docs]: https://thevickypedia.github.io/none-shall-pass/
