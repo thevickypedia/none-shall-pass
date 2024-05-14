@@ -21,7 +21,7 @@ inputs:
     description: Fail the action if any hyperlinks are broken
     required: false
     default: "false"
-outputs: {}
+outputs: { }
 runs:
   using: composite
   steps:
@@ -45,13 +45,18 @@ runs:
         chmod +x asset
       shell: bash
 
+    - name: Set Debug Flag
+      run: |
+        if [ "${{ inputs.debug }}" == "true" ] || [ "${{ env.RUNNER_DEBUG }}" == "1" ]; then
+          echo "debug=true" >> $GITHUB_ENV
+        else
+          echo "debug=false" >> $GITHUB_ENV
+        fi
+      shell: bash
+
     - name: Run Asset
       run: |
-        debug="false"
-        if [[ ${{ inputs.debug }} == true || ${{ env.RUNNER_DEBUG }} == 1 ]]; then
-          debug="true"
-        fi
-        ./asset --debug "$debug" --owner "${{ inputs.owner }}" --repo "${{ inputs.repo }}" --exclude "${{ inputs.excludeHostnames }}"
+        ./asset --debug ${{ env.debug }} --owner ${{ inputs.owner }} --repo ${{ inputs.repo }} --exclude "${{ inputs.excludeHostnames }}"
       shell: bash
 
     - name: Summary
