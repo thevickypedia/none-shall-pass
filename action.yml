@@ -17,6 +17,10 @@ inputs:
     description: Hostnames for which the failure should be ignored
     required: false
     default: ""
+  failOnError:
+    description: Fail the action if any hyperlinks are broken
+    required: false
+    default: "false"
 outputs: {}
 runs:
   using: composite
@@ -28,7 +32,7 @@ runs:
 
     - name: Download Asset
       run: |
-        response=$(curl -sL "https://api.github.com/repos/thevickypedia/none-shall-pass-rustic/releases/tags/v0.1.6")
+        response=$(curl -sL "https://api.github.com/repos/thevickypedia/none-shall-pass-rustic/releases/tags/v0.1.7")
         release_id=$(echo "$response" | jq -r '.id')
         tag_name=$(echo "$response" | jq -r '.tag_name')
         published_at=$(echo "$response" | jq -r '.published_at')
@@ -42,7 +46,34 @@ runs:
       shell: bash
 
     - name: Run Asset
-      run: ./asset --debug ${{ inputs.debug }} --owner ${{ inputs.owner }} --repo ${{ inputs.repo }} --exclude "${{ inputs.excludeHostnames }}"
+      run: |
+        debug="false"
+        if [[ ${{ inputs.debug }} == true || ${{ env.RUNNER_DEBUG }} == 1 ]]; then
+          debug="true"
+        fi
+        ./asset --debug "$debug" --owner "${{ inputs.owner }}" --repo "${{ inputs.repo }}" --exclude "${{ inputs.excludeHostnames }}"
+      shell: bash
+
+    - name: Summary
+      run: |
+        if [ -f "GH_ACTIONS_SUMMARY" ]; then
+          echo "::error title=Failed hyperlinks::Following hyperlinks are broken."
+          while IFS= read -r line || [[ -n "$line" ]]; do
+            echo "$line" >> $GITHUB_STEP_SUMMARY
+          done < "GH_ACTIONS_SUMMARY"
+        else
+          echo "::notice title=Successful Run::No broken hyperlinks found."
+        fi
+      shell: bash
+
+    - name: Exit Code
+      if: inputs.failOnError == 'true'
+      run: |
+        if [ -f "GH_ACTIONS_SUMMARY" ]; then
+          exit 1
+        else
+          exit 0
+        fi
       shell: bash
 
 branding:
