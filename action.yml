@@ -63,17 +63,24 @@ runs:
       run: |
         if [ ! -f "gh_actions_summary.json" ]; then
           echo "::notice title=Successful Run::No broken hyperlinks found."
-          exit 0
         fi
         echo "::error title=Failed Hyperlinks::Check the summary for detailed report."
+        echo "## none-shall-pass scan result" >> $GITHUB_STEP_SUMMARY
         jq -c '.[]' gh_actions_summary.json | while read -r obj; do
           filename=$(echo "$obj" | jq -r '.filename')
           filepath=$(echo "$obj" | jq -r '.filepath')
           text=$(echo "$obj" | jq -r '.text')
           url=$(echo "$obj" | jq -r '.url')
-          echo "::error title=Failed hyperlinks::$text => $url in [$filename](${{ github.server_url }}/${{ github.repository }}/$filepath)"
+          echo "- $text => $url in [$filename](${{ github.server_url }}/${{ github.repository }}/$filepath)" >> $GITHUB_STEP_SUMMARY
         done
-        exit 1
+      shell: bash
+
+    - name: Graceful Exit
+      if: inputs.failOnError == 'true'
+      run: |
+        if [ -f "gh_actions_summary.json" ]; then
+          exit 1
+        fi
       shell: bash
 
 branding:
