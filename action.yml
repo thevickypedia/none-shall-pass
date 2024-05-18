@@ -32,7 +32,7 @@ runs:
 
     - name: Download Asset
       run: |
-        response=$(curl -sL "https://api.github.com/repos/thevickypedia/none-shall-pass-rustic/releases/tags/v0.1.8-a")
+        response=$(curl -sL "https://api.github.com/repos/thevickypedia/none-shall-pass-rustic/releases/tags/v0.1.9")
         release_id=$(echo "$response" | jq -r '.id')
         tag_name=$(echo "$response" | jq -r '.tag_name')
         published_at=$(echo "$response" | jq -r '.published_at')
@@ -63,6 +63,7 @@ runs:
       run: |
         if [ ! -f "gh_actions_summary.json" ]; then
           echo "::notice title=Successful Run::No broken hyperlinks found."
+          exit 0
         fi
         echo "::error title=Failed Hyperlinks::Check the summary for detailed report."
         echo "## none-shall-pass scan result" >> $GITHUB_STEP_SUMMARY
@@ -76,7 +77,7 @@ runs:
           else
             hyperlink="${{ github.server_url }}/${{ github.repository }}/$filepath"
           fi
-          echo "- $text => $url in [$filename]($hyperlink)" >> $GITHUB_STEP_SUMMARY
+          echo "- `$text` => $url in [$filename]($hyperlink)" >> $GITHUB_STEP_SUMMARY
         done
       shell: bash
 
