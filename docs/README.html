@@ -112,7 +112,7 @@ within markdown files in your repository and wiki pages.</p>
 <span class="w">  </span><span class="nt">none-shall-pass</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
 <span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thevickypedia/none-shall-pass@v4</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thevickypedia/none-shall-pass@v5</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -122,12 +122,13 @@ within markdown files in your repository and wiki pages.</p>
 <section id="action-configuration-options">
 <h3>Action configuration options<a class="headerlink" href="#action-configuration-options" title="Permalink to this heading"></a></h3>
 <p>Use the options below to configure debug and fail state when broken links are found in the repository/wiki pages.</p>
-<p>| option             | requirement | description                                                               |
-|——————–|————-|—————————————————————————|
-| <code class="docutils literal notranslate"><span class="pre">debug</span></code>            | optional    | If <code class="docutils literal notranslate"><span class="pre">true</span></code> (Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>) debug level logging is enabled             |
-| <code class="docutils literal notranslate"><span class="pre">owner</span></code>            | optional    | Owner/Organization of the repository - Defaults to current owner/org name |
-| <code class="docutils literal notranslate"><span class="pre">repo</span></code>             | optional    | Name of the repository - Defaults to current repository’s name            |
-| <code class="docutils literal notranslate"><span class="pre">excludeHostnames</span></code> | optional    | Space separated list of hostnames to ignore when failed                   |</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">debug</span></code> - If <code class="docutils literal notranslate"><span class="pre">true</span></code> debug level logging is enabled. <em>Defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code></em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">owner</span></code> - Owner/Organization of the repository. <em>Defaults to current owner/org name</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">repo</span></code> - Name of the repository. <em>Defaults to current repository’s name</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">excludeHostnames</span></code> - Space separated list of hostnames to ignore when failed. <em>Defaults to <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">failOnError</span></code> - If <code class="docutils literal notranslate"><span class="pre">true</span></code> (Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>) the action will fail if broken links are found. <em>Defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code></em></p></li>
+</ul>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">excludeHostnames</span></code> will perform a regex like lookup, so wildcards (*) are not required<br></p>
 </div></blockquote>

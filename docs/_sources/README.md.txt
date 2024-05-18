@@ -30,7 +30,7 @@ jobs:
   none-shall-pass:
     runs-on: ubuntu-latest
     steps:
-      - uses: thevickypedia/none-shall-pass@v4
+      - uses: thevickypedia/none-shall-pass@v5
 ```
 
 - Commit your changes to trigger the workflow or run the workflow manually.
@@ -39,12 +39,11 @@ jobs:
 
 Use the options below to configure debug and fail state when broken links are found in the repository/wiki pages.
 
-| option             | requirement | description                                                               |
-|--------------------|-------------|---------------------------------------------------------------------------|
-| `debug`            | optional    | If `true` (Default is `false`) debug level logging is enabled             |
-| `owner`            | optional    | Owner/Organization of the repository - Defaults to current owner/org name |
-| `repo`             | optional    | Name of the repository - Defaults to current repository's name            |
-| `excludeHostnames` | optional    | Space separated list of hostnames to ignore when failed                   |
+- `debug` - If `true` debug level logging is enabled. _Defaults to `false`_
+- `owner` - Owner/Organization of the repository. _Defaults to current owner/org name_
+- `repo` - Name of the repository. _Defaults to current repository's name_
+- `excludeHostnames` - Space separated list of hostnames to ignore when failed. _Defaults to `""`_
+- `failOnError` - If `true` (Default is `false`) the action will fail if broken links are found. _Defaults to `false`_
 
 > `excludeHostnames` will perform a regex like lookup, so wildcards (*) are not required<br>
 

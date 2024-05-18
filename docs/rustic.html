@@ -51,6 +51,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#none-shall-pass-rustic">none-shall-pass-rustic</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arguments">Arguments</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#crate">Crate</a></li>
@@ -112,14 +113,16 @@
 <li><p>Clones the GitHub wiki pages</p></li>
 <li><p>Looks up all the <code class="docutils literal notranslate"><span class="pre">*.md</span></code> files</p></li>
 <li><p>Scans for hyperlinks using regex (<code class="docutils literal notranslate"><span class="pre">inline</span></code>, <code class="docutils literal notranslate"><span class="pre">footnote</span></code>, and <code class="docutils literal notranslate"><span class="pre">anchored</span></code>)</p></li>
-<li><p>Sets exit code to 1, if any of the URL fails to resolve (<code class="docutils literal notranslate"><span class="pre">GET</span></code> request)</p>
-<ul>
-<li><p>Ignores failure when the URL is a <code class="docutils literal notranslate"><span class="pre">localhost</span></code></p></li>
-<li><p>More exclusions can be added via commandline argument</p></li>
+<li><p>Ignores failure when the URL is a <code class="docutils literal notranslate"><span class="pre">localhost</span></code> / <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code> / <code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code></p></li>
 </ul>
-</li>
-<li><p>Takes argument <code class="docutils literal notranslate"><span class="pre">debug</span></code> <em>(as boolean)</em> to enable debug level logging</p></li>
-<li><p>Takes argument <code class="docutils literal notranslate"><span class="pre">excludeHostnames</span></code> <em>(as comma separated list)</em> to exclude URLs to have known failures</p></li>
+</section>
+<section id="arguments">
+<h3>Arguments<a class="headerlink" href="#arguments" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>–debug</strong> - Enables debug level logging</p></li>
+<li><p><strong>–owner</strong> - Owner/organization of the repository</p></li>
+<li><p><strong>–repo</strong> - Name of the repository</p></li>
+<li><p><strong>–exclude</strong> - Exclude URLs <em>(as comma separated list)</em> to have known failures</p></li>
 </ul>
 </section>
 </section>
