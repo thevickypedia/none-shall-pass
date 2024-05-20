@@ -30,19 +30,102 @@ runs:
       with:
         fetch-depth: 0
 
+    - name: Detect OS and Architecture
+      run: |
+        # NOTE: `uname -m` is more accurate and universal than `arch`
+        # See https://en.wikipedia.org/wiki/Uname
+        unamem="$(uname -m)"
+        case $unamem in
+        *aarch64*|arm64)
+            architecture="arm64";;
+        *64*)
+            architecture="amd64";;
+        *86*)
+            architecture="386";;
+        *armv5*)
+            architecture="armv5";;
+        *armv6*)
+            architecture="armv6";;
+        *armv7*)
+            architecture="armv7";;
+        *)
+            echo "::error title=Architecture::Aborted, unsupported or unknown architecture: $unamem"
+            exit 1
+            ;;
+        esac
+
+        binary="none-shall-pass"
+        extension=".tar.gz"
+        unameu="$(tr '[:lower:]' '[:upper:]' <<<$(uname))"
+        if [[ $unameu == *DARWIN* ]]; then
+            os_name="darwin"
+        elif [[ $unameu == *LINUX* ]]; then
+            os_name="linux"
+        elif [[ $unameu == *FREEBSD* ]]; then
+            os_name="freebsd"
+        elif [[ $unameu == *NETBSD* ]]; then
+            os_name="netbsd"
+        elif [[ $unameu == *OPENBSD* ]]; then
+            os_name="openbsd"
+        elif [[ $unameu == *WIN* || $unameu == MSYS* ]]; then
+            # Should catch cygwin
+            os_name="windows"
+            binary+=".exe"
+            extension=".zip"
+        else
+            echo "::error title=Operating System::Aborted, unsupported or unknown OS: $(uname)"
+            exit 1
+        fi
+        echo "binary=$binary" >> $GITHUB_ENV
+        echo "extension=$extension" >> $GITHUB_ENV
+        echo "architecture=$architecture" >> $GITHUB_ENV
+        echo "os_name=$os_name" >> $GITHUB_ENV
+        echo "::notice title=Runner Platform::$os_name-$architecture"
+      shell: bash
+
+    - name: Detect Downloader
+      run: |
+        if type -p curl >/dev/null 2>&1; then
+          echo "net_getter=curl -fsSL" >> $GITHUB_ENV
+        elif type -p wget >/dev/null 2>&1; then
+          echo "net_getter=wget -qO-" >> $GITHUB_ENV
+        else
+          echo "::error title=Downloader404::Aborted, could not find curl or wget"
+          exit 1
+        fi
+      shell: bash
+
     - name: Download Asset
       run: |
-        response=$(curl -sL "https://api.github.com/repos/thevickypedia/none-shall-pass-rustic/releases/tags/v0.1.9")
+        nsp_dir="none-shall-pass-${{ env.os_name }}-${{ env.architecture }}"
+        nsp_file="$nsp_dir${{ env.extension }}"
+        response=$(${{ env.net_getter }} "https://api.github.com/repos/thevickypedia/none-shall-pass-rustic/releases/tags/v0.2.1")
         release_id=$(echo "$response" | jq -r '.id')
+        if [ -z "$release_id" ]; then
+          echo "::error title=Release ID::Failed to get the release id for '$nsp_file'"
+          exit 1
+        fi
+        echo "Latest Release ID: $release_id"
         tag_name=$(echo "$response" | jq -r '.tag_name')
         published_at=$(echo "$response" | jq -r '.published_at')
-        asset_id=$(echo "$response" | jq -r '.assets[0].id')
         echo "'none-shall-pass-rustic' $tag_name published at $published_at"
-        echo "Latest Release ID: $release_id"
+        asset_id=$(echo "$response" | jq -r --arg nsp_file "$nsp_file" '.assets[] | select(.name == $nsp_file) | .id')
+        if [ -z "$asset_id" ]; then
+          echo "::error title=Asset ID::Failed to get the asset id for '$nsp_file'"
+          exit 1
+        fi
+        asset_name=$(echo "$response" | jq -r --arg nsp_file "$nsp_file" '.assets[] | select(.name == $nsp_file) | .name')
+        download_url=$(echo "$response" | jq -r --arg nsp_file "$nsp_file" '.assets[] | select(.name == $nsp_file) | .browser_download_url')
         echo "Asset ID: $asset_id"
-        download_url=$(echo "$response" | jq -r '.assets[0].browser_download_url')
-        curl -o asset -LH "Accept: application/octet-stream" "$download_url"
-        chmod +x asset
+        echo "Asset Name: $asset_name"
+        echo "Download URL: $download_url"
+        ${{ env.net_getter }} -H "Accept: application/octet-stream" "$download_url" > $nsp_file
+        case "$nsp_file" in
+          *.zip)    unzip -o "$nsp_file" ;;
+          *.tar.gz) tar -xzf "$nsp_file" ;;
+        esac
+        mv "$nsp_dir/${{ env.binary }}" . && rm -rf $nsp_dir $nsp_file
+        chmod +x ${{ env.binary }}
       shell: bash
 
     - name: Set Debug Flag
@@ -56,7 +139,7 @@ runs:
 
     - name: Run Asset
       run: |
-        ./asset --debug ${{ env.debug }} --owner ${{ inputs.owner }} --repo ${{ inputs.repo }} --exclude "${{ inputs.excludeHostnames }}"
+        ./${{ env.binary }} --debug ${{ env.debug }} --owner ${{ inputs.owner }} --repo ${{ inputs.repo }} --exclude "${{ inputs.excludeHostnames }}"
       shell: bash
 
     - name: Summary
