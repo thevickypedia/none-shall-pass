@@ -95,11 +95,16 @@ runs:
         fi
       shell: bash
 
+    - name: Install Requirements
+      if: env.os_name == 'windows'
+      run: winget install jqlang.jq
+      shell: bash
+
     - name: Download Asset
       run: |
         nsp_dir="none-shall-pass-${{ env.os_name }}-${{ env.architecture }}"
         nsp_file="$nsp_dir${{ env.extension }}"
-        response=$(${{ env.net_getter }} "https://api.github.com/repos/thevickypedia/none-shall-pass-rustic/releases/tags/v0.2.1")
+        response=$(${{ env.net_getter }} "https://api.github.com/repos/thevickypedia/none-shall-pass-rustic/releases/tags/v0.2.3-a")
         release_id=$(echo "$response" | jq -r '.id')
         if [ -z "$release_id" ]; then
           echo "::error title=Release ID::Failed to get the release id for '$nsp_file'"
@@ -116,9 +121,9 @@ runs:
         fi
         asset_name=$(echo "$response" | jq -r --arg nsp_file "$nsp_file" '.assets[] | select(.name == $nsp_file) | .name')
         download_url=$(echo "$response" | jq -r --arg nsp_file "$nsp_file" '.assets[] | select(.name == $nsp_file) | .browser_download_url')
-        echo "Asset ID: $asset_id"
-        echo "Asset Name: $asset_name"
-        echo "Download URL: $download_url"
+        echo "::notice title=Asset ID::$asset_id"
+        echo "::notice title=Asset Name::$asset_name"
+        echo "::notice title=Download URL::$download_url"
         ${{ env.net_getter }} -H "Accept: application/octet-stream" "$download_url" > $nsp_file
         case "$nsp_file" in
           *.zip)    unzip -o "$nsp_file" ;;
