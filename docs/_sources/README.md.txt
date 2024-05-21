@@ -28,7 +28,7 @@ on:
 
 jobs:
   none-shall-pass:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Can run on multiple operating systems
     steps:
       - uses: thevickypedia/none-shall-pass@v5
 ```

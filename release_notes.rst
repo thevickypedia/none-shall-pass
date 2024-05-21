@@ -1,8 +1,13 @@
 Release Notes
 =============
 
-v5 (05/18/2024)
+v5 (05/20/2024)
 ---------------
+- Includes a feature to run on multiple operating systems
+- Retains all features from `v5.0`
+
+v5.0 (05/20/2024)
+-----------------
 - `d3624cb <https://github.com/thevickypedia/none-shall-pass/commit/d3624cbca6af3faa5a6e247ea038724a66e5baa1>`_ Add additional flag to `failOnError`
 - `d3624cb <https://github.com/thevickypedia/none-shall-pass/commit/d3624cbca6af3faa5a6e247ea038724a66e5baa1>`_ Set `debug` flag based on debug mode on GH actions
 - `67dfbc2 <https://github.com/thevickypedia/none-shall-pass/commit/67dfbc22a52fa3c000c63474771d6a1a52e782a6>`_ Write errors to step summary along with hyperlinks to markdown files and exit gracefully
