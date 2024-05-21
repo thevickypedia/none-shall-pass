@@ -97,14 +97,17 @@ runs:
 
     - name: Install Requirements
       if: env.os_name == 'windows'
-      run: winget install jqlang.jq
+      run: |
+        if [[ ! $(command -v jq) ]]; then
+          winget install jqlang.jq
+        fi
       shell: bash
 
     - name: Download Asset
       run: |
         nsp_dir="none-shall-pass-${{ env.os_name }}-${{ env.architecture }}"
         nsp_file="$nsp_dir${{ env.extension }}"
-        response=$(${{ env.net_getter }} "https://api.github.com/repos/thevickypedia/none-shall-pass-rustic/releases/tags/v0.2.3-a")
+        response=$(${{ env.net_getter }} "https://api.github.com/repos/thevickypedia/none-shall-pass-rustic/releases/tags/v0.2.3")
         release_id=$(echo "$response" | jq -r '.id')
         if [ -z "$release_id" ]; then
           echo "::error title=Release ID::Failed to get the release id for '$nsp_file'"
@@ -116,13 +119,12 @@ runs:
         echo "'none-shall-pass-rustic' $tag_name published at $published_at"
         asset_id=$(echo "$response" | jq -r --arg nsp_file "$nsp_file" '.assets[] | select(.name == $nsp_file) | .id')
         if [ -z "$asset_id" ]; then
-          echo "::error title=Asset ID::Failed to get the asset id for '$nsp_file'"
+          echo "::error title=Artifact ID::Failed to get the artifact id for '$nsp_file'"
           exit 1
         fi
         asset_name=$(echo "$response" | jq -r --arg nsp_file "$nsp_file" '.assets[] | select(.name == $nsp_file) | .name')
         download_url=$(echo "$response" | jq -r --arg nsp_file "$nsp_file" '.assets[] | select(.name == $nsp_file) | .browser_download_url')
-        echo "::notice title=Asset ID::$asset_id"
-        echo "::notice title=Asset Name::$asset_name"
+        echo "::notice title=Artifact Name::$asset_name [$asset_id]"
         echo "::notice title=Download URL::$download_url"
         ${{ env.net_getter }} -H "Accept: application/octet-stream" "$download_url" > $nsp_file
         case "$nsp_file" in
@@ -165,7 +167,7 @@ runs:
           else
             hyperlink="${{ github.server_url }}/${{ github.repository }}/$filepath"
           fi
-          echo "- `$text` => $url in [$filename]($hyperlink)" >> $GITHUB_STEP_SUMMARY
+          echo "- '$text' => $url in [$filename]($hyperlink)" >> $GITHUB_STEP_SUMMARY
         done
       shell: bash
 
